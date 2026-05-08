@@ -1,1 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vida+ Sistema de Espera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Fraunces:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-slate-800">
+
+    <section id="page-home" class="min-h-screen relative overflow-hidden">
+
+    <!-- Glow decorativo -->
+    <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-emerald-300/30 blur-3xl rounded-full"></div>
+    <div class="absolute bottom-[-200px] left-[-200px] w-[500px] h-[500px] bg-emerald-200/40 blur-3xl rounded-full"></div>
+
+    <!-- NAVBAR -->
+    <nav class="relative z-10 flex justify-between items-center px-6 md:px-12 py-5 border-b border-emerald-100/80 bg-white/50 backdrop-blur-sm">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-black text-emerald-950 leading-none">
+                    Vida+
+                </h1>
+
+                <p class="text-sm text-emerald-800/60 mt-1">
+                    Cuidando de você com carinho
+                </p>
+            </div>
+        </div>
+
+        <!-- infos topo -->
+        <div class="hidden md:flex items-center gap-8 text-emerald-900/70 font-medium">
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a2 2 0 011.789 1.106l1.342 2.683a2 2 0 01-.445 2.32l-1.2 1.2a16 16 0 006.586 6.586l1.2-1.2a2 2 0 012.32-.445l2.683 1.342A2 2 0 0121 18.72V22a2 2 0 01-2 2h-1C9.163 24 0 14.837 0 3V2a2 2 0 012-2h1z"/>
+                </svg>
+
+                <span>192 — Emergência</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+
+                <span>24 horas</span>
+            </div>
+        </div>
+
+        <!-- botão -->
+        <button onclick="goToPage('page-login')"
+            class="bg-blue-100 text-blue-700 px-6 py-3 rounded-2xl font-semibold hover:bg-blue-200 transition-all duration-300 shadow-sm">
+            Acesso Médico
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-20">
+
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+            <!-- LADO ESQUERDO -->
+            <div>
+
+                <!-- badge -->
+                <div
+                    class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-8">
+
+                    <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+
+                    Pronto-socorro aberto agora
+                </div>
+
+                <!-- título -->
+                <h1
+                    class="font-display text-[54px] md:text-[76px] leading-[0.95] text-emerald-950 tracking-[-2px] max-w-xl">
+                    Seu cuidado começa aqui.
+                </h1>
+
+                <!-- subtítulo -->
+                <p class="mt-8 text-[22px] leading-relaxed text-emerald-900/60 max-w-2xl">
+                    Faça seu cadastro, conte o que está sentindo e acompanhe sua posição na fila em tempo real.
+                </p>
+
+                <!-- botão -->
+                <button onclick="goToPage('page-cadastro')"
+                    class="mt-10 bg-[#0b7a4b] hover:bg-[#08653e] transition-all duration-300 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-emerald-900/10 flex items-center gap-4">
+
+                    Iniciar atendimento
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+                <!-- status -->
+                <div class="flex gap-20 mt-16 border-t border-emerald-100 pt-10">
+
+                    <div>
+                        <h3 class="text-5xl font-display text-emerald-900">
+                            5
+                        </h3>
+
+                        <p class="text-emerald-900/50 mt-2">
+                            Na fila
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-5xl font-display text-emerald-900">
+                            ~15min
+                        </h3>
+
+                        <p class="text-emerald-900/50 mt-2">
+                            Espera média
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD DIREITO -->
+            <div class="relative">
+
+                <!-- ícone flutuante -->
+                <div
+                    class="absolute -top-8 right-10 w-24 h-24 rounded-3xl bg-emerald-500 rotate-12 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+
+                <!-- card -->
+                <div
+                    class="bg-white/90 backdrop-blur-md rounded-[40px] p-12 shadow-[0_20px_80px_rgba(16,185,129,0.12)] border border-white">
+
+                    <h3 class="font-display text-4xl text-emerald-950 mb-10">
+                        Como funciona
+                    </h3>
+
+                    <div class="space-y-8">
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                1
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Cadastro
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Informe seus dados pessoais
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                2
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Formulário
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Responda perguntas sobre seus sintomas
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                3
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Fila
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Veja sua posição e tempo estimado
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+    <footer
+        class="absolute bottom-6 left-1/2 -translate-x-1/2 text-emerald-900/40 text-sm">
+        © Vida+ — Sistema de triagem demonstrativo
+    </footer>
+
+</section>
+
+    <section id="page-cadastro" class="hidden p-6 md:p-12">
+        <div class="max-w-3xl mx-auto">
+            <button onclick="goToPage('page-home')" class="text-emerald-800 font-medium mb-8">← Voltar</button>
+            <div class="bg-white rounded-3xl p-8 shadow-xl">
+                <h1 class="font-display text-4xl mb-6">Cadastro</h1>
+                <div class="space-y-6">
+                    <input type="text" id="nome-paciente" placeholder="Nome completo" class="w-full px-4 py-3 rounded-xl border">
+                    <input type="date" id="nascimento-paciente" class="w-full px-4 py-3 rounded-xl border">
+                    <button onclick="goToPage('page-triagem')" class="w-full bg-emerald-800 text-white py-4 rounded-xl font-bold">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-triagem" class="hidden p-6 md:p-12">
+        <div class="max-w-3xl mx-auto">
+            <button onclick="goToPage('page-cadastro')" class="text-emerald-800 font-medium mb-8">← Voltar</button>
+            <div class="bg-white rounded-3xl p-8 shadow-xl space-y-6">
+                <h1 class="font-display text-3xl">O que você está sentindo?</h1>
+                <textarea id="sintomas" placeholder="Descreva seus sintomas..." class="w-full px-4 py-3 rounded-xl border"></textarea>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Leve')">Leve</button>
+                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Moderada')">Moderada</button>
+                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Forte')">Forte</button>
+                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Intensa')">Intensa</button>
+                </div>
+                <button onclick="entrarNaFila()" class="w-full bg-emerald-800 text-white py-4 rounded-xl font-bold">Entrar na fila</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-fila" class="hidden p-6 md:p-12 max-w-3xl mx-auto">
+        <div class="bg-emerald-800 text-white rounded-3xl p-8 mb-6 text-center">
+            <p class="text-sm opacity-80">Sua posição atual</p>
+            <h2 class="text-6xl font-bold my-2" id="posicao-fila">--</h2>
+            <p id="status-prioridade" class="text-emerald-200">Calculando...</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-xl">
+            <h3 class="font-semibold mb-4 text-slate-400 uppercase text-xs tracking-wider">Próximos atendimentos</h3>
+            <ul id="lista-pacientes" class="space-y-3"></ul>
+            <button onclick="goToPage('page-home')" class="w-full mt-8 py-3 border border-slate-200 rounded-xl text-slate-500 font-medium hover:bg-slate-50">Sair da fila</button>
+        </div>
+    </section>
+
+    <section id="page-login" class="hidden flex justify-center items-center h-screen p-6">
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl">
+            <h1 class="font-display text-2xl mb-6 text-center text-slate-800">Acesso Restrito</h1>
+            <div class="space-y-4">
+                <input type="text" id="crm-medico" placeholder="CRM" class="w-full px-4 py-3 border rounded-xl">
+                <input type="password" id="senha-medico" placeholder="Senha" class="w-full px-4 py-3 border rounded-xl">
+                <button onclick="logarMedico()" class="w-full bg-blue-600 py-3 rounded-xl text-white font-bold">Entrar no Sistema</button>
+                <button onclick="goToPage('page-home')" class="w-full text-slate-400 text-sm">Voltar ao Início</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-dashboard" class="hidden p-6 h-screen flex flex-col">
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-slate-800">Painel de Triagem</h1>
+            <button onclick="goToPage('page-login')" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-bold">Sair</button>
+        </header>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-blue-500">
+                <p class="text-slate-500 text-sm">Total na Fila</p>
+                <span id="total-pacientes" class="text-3xl font-bold text-slate-800">0</span>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-500">
+                <p class="text-slate-500 text-sm">Emergências</p>
+                <span id="total-emergencias" class="text-3xl font-bold text-red-600">0</span>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 flex-1 overflow-hidden">
+            <div class="md:col-span-2 bg-white rounded-2xl shadow-sm overflow-y-auto p-4">
+                <ul id="lista-dashboard" class="space-y-2"></ul>
+            </div>
+            <div id="detalhes-paciente" class="bg-slate-50 rounded-2xl p-6 border-2 border-dashed border-slate-200">
+                <p class="text-slate-400 text-center mt-10">Selecione um paciente para ver o prontuário</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
 

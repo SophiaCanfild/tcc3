@@ -1,1 +1,40 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    background: #f5fbf7;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
+.font-display {
+    font-family: 'Fraunces', serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* intensidade */
+.intensidade-active {
+    background-color: #065f46 !important;
+    color: white !important;
+    border-color: #065f46 !important;
+}
+
+/* animações */
+button {
+    transition: all .3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* card hover */
+.fila-item {
+    transition: all 0.2s;
+}
+
+.fila-item:hover {
+    transform: translateX(5px);
+    background-color: #f1f5f9;
+}
