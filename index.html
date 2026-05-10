@@ -223,19 +223,174 @@
 
 </section>
 
-    <section id="page-cadastro" class="hidden p-6 md:p-12">
-        <div class="max-w-3xl mx-auto">
-            <button onclick="goToPage('page-home')" class="text-emerald-800 font-medium mb-8">← Voltar</button>
-            <div class="bg-white rounded-3xl p-8 shadow-xl">
-                <h1 class="font-display text-4xl mb-6">Cadastro</h1>
-                <div class="space-y-6">
-                    <input type="text" id="nome-paciente" placeholder="Nome completo" class="w-full px-4 py-3 rounded-xl border">
-                    <input type="date" id="nascimento-paciente" class="w-full px-4 py-3 rounded-xl border">
-                    <button onclick="goToPage('page-triagem')" class="w-full bg-emerald-800 text-white py-4 rounded-xl font-bold">Continuar</button>
-                </div>
+    <section id="page-cadastro" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
+
+    <!-- glow -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/40 blur-3xl rounded-full"></div>
+
+    <!-- NAVBAR -->
+    <nav class="relative z-10 flex justify-between items-center px-6 md:px-12 py-5 border-b border-emerald-100/80 bg-white/60 backdrop-blur-sm">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-black text-emerald-950 leading-none">
+                    Vida+
+                </h1>
+
+                <p class="text-sm text-emerald-800/60 mt-1">
+                    Cuidando de você com carinho
+                </p>
             </div>
         </div>
-    </section>
+
+        <!-- infos -->
+        <div class="hidden md:flex items-center gap-8 text-emerald-900/70 font-medium">
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a2 2 0 011.789 1.106l1.342 2.683a2 2 0 01-.445 2.32l-1.2 1.2a16 16 0 006.586 6.586l1.2-1.2a2 2 0 012.32-.445l2.683 1.342A2 2 0 0121 18.72V22a2 2 0 01-2 2h-1C9.163 24 0 14.837 0 3V2a2 2 0 012-2h1z"/>
+                </svg>
+
+                <span>192 — Emergência</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+
+                <span>24 horas</span>
+            </div>
+        </div>
+
+        <!-- botão -->
+        <button onclick="goToPage('page-login')"
+            class="bg-blue-100 text-blue-700 px-6 py-3 rounded-2xl font-semibold hover:bg-blue-200 transition-all duration-300 shadow-sm">
+            Acesso Médico
+        </button>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
+
+        <!-- voltar -->
+        <button onclick="goToPage('page-home')"
+            class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
+            
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+
+            Voltar
+        </button>
+
+        <!-- progresso -->
+        <div class="flex items-center mb-14">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-emerald-900/10">
+                1
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                2
+            </div>
+
+            <div class="flex-1 h-[2px] bg-slate-200 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+        </div>
+
+        <!-- título -->
+        <div class="mb-10">
+            <h1 class="font-display text-6xl leading-none text-emerald-950">
+                Cadastro do paciente
+            </h1>
+
+            <p class="mt-4 text-xl text-emerald-900/55">
+                Preencha seus dados para começar o atendimento.
+            </p>
+        </div>
+
+        <!-- card -->
+        <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
+
+            <div class="space-y-8">
+
+                <!-- nome -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome-paciente"
+                        placeholder="Maria da Silva"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    >
+                </div>
+
+                <!-- nascimento -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nascimento-paciente"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    >
+                </div>
+
+                <!-- telefone -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        placeholder="(11) 99999-9999"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    >
+                </div>
+
+                <!-- botão -->
+                <button
+                    onclick="goToPage('page-triagem')"
+                    class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg transition-all duration-300 shadow-xl shadow-emerald-900/10 flex items-center justify-center gap-3"
+                >
+                    Continuar para triagem
+
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</section>
 
     <section id="page-triagem" class="hidden p-6 md:p-12">
         <div class="max-w-3xl mx-auto">

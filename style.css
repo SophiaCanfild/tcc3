@@ -38,3 +38,12 @@ button:hover {
     transform: translateX(5px);
     background-color: #f1f5f9;
 }
+input,
+textarea {
+    transition: all .25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
