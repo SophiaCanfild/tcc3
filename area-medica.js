@@ -1,216 +1,362 @@
-function entrarSistema() {
+// ======================================
+// RELÓGIO
+// ======================================
 
-    const crm = document.getElementById('crm-medico').value.trim();
-    const senha = document.getElementById('senha-medico').value.trim();
+function atualizarRelogio() {
 
-    if(crm === '' || senha === ''){
+    const agora = new Date();
 
-        alert('Preencha todos os campos.');
-        return;
+    const horas = String(agora.getHours()).padStart(2, '0');
+
+    const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+    document.getElementById('clock-box').innerText =
+        `${horas}:${minutos}`;
+}
+
+setInterval(atualizarRelogio, 1000);
+
+atualizarRelogio();
+
+
+// ======================================
+// LOGOUT
+// ======================================
+
+function logoutMedico() {
+
+    const confirmar = confirm(
+        'Deseja realmente encerrar a sessão médica?'
+    );
+
+    if(confirmar){
+
+        window.location.href = 'index.html';
     }
-
-    document.getElementById('page-login-medico').classList.add('hidden');
-    document.getElementById('page-dashboard').classList.remove('hidden');
-
-    atualizarDashboard();
 }
 
-function logoutMedico(){
 
-    document.getElementById('page-dashboard').classList.add('hidden');
-    document.getElementById('page-login-medico').classList.remove('hidden');
+// ======================================
+// CARREGAR PACIENTES
+// ======================================
+
+function carregarPacientes() {
+
+    return JSON.parse(
+        localStorage.getItem('pacientes')
+    ) || [];
 }
 
-function atualizarDashboard(){
 
-    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+// ======================================
+// SALVAR PACIENTES
+// ======================================
 
-    const lista = document.getElementById('lista-dashboard');
+function salvarPacientes(pacientes) {
 
-    const totalPacientes = document.getElementById('total-pacientes');
-    const totalEmergencias = document.getElementById('total-emergencias');
-    const totalAtendimento = document.getElementById('total-atendimento');
-    const contadorFila = document.getElementById('contador-fila');
+    localStorage.setItem(
+        'pacientes',
+        JSON.stringify(pacientes)
+    );
+}
+
+
+// ======================================
+// DASHBOARD
+// ======================================
+
+function atualizarDashboard() {
+
+    const pacientes = carregarPacientes();
+
+    const lista =
+        document.getElementById('lista-dashboard');
+
+    const totalPacientes =
+        document.getElementById('total-pacientes');
+
+    const totalEmergencias =
+        document.getElementById('total-emergencias');
+
+    const totalAtendimento =
+        document.getElementById('total-atendimento');
+
+    const contadorLista =
+        document.getElementById('contador-lista');
 
     lista.innerHTML = '';
 
     let emergencias = 0;
-    let atendimento = 0;
 
-    pacientes.forEach((paciente,index)=>{
+    let emAtendimento = 0;
 
-        if(paciente.prioridade === 'Vermelho'){
+
+    pacientes.forEach((paciente, index) => {
+
+        if(paciente.prioridade === 'Vermelho') {
             emergencias++;
         }
 
-        if(paciente.status === 'Em atendimento'){
-            atendimento++;
+        if(paciente.status === 'Em atendimento') {
+            emAtendimento++;
         }
 
         const li = document.createElement('li');
 
-        li.className =
-        'p-5 rounded-3xl border border-slate-100 mb-4 cursor-pointer hover:shadow-lg transition bg-white';
+        li.className = 'patient-item';
+
+        li.onclick = () => abrirPaciente(index);
 
         li.innerHTML = `
-            <div class="flex justify-between items-center">
+
+            <div class="patient-top">
 
                 <div>
 
-                    <h4 class="text-lg font-bold text-slate-800">
+                    <h3 class="patient-name">
                         ${paciente.nome}
-                    </h4>
+                    </h3>
 
-                    <p class="text-slate-500 mt-1">
+                    <p class="patient-symptom">
                         ${paciente.sintomas}
                     </p>
 
                 </div>
 
-                <div class="text-right">
-
-                    <span class="px-4 py-2 rounded-full text-sm font-bold ${corPrioridade(paciente.prioridade)}">
-                        ${paciente.prioridade}
-                    </span>
-
-                    <p class="text-xs text-slate-400 mt-2">
-                        ${paciente.status || 'Aguardando'}
-                    </p>
-
-                </div>
+                <span class="priority ${paciente.prioridade.toLowerCase()}">
+                    ${paciente.prioridade}
+                </span>
 
             </div>
-        `;
 
-        li.onclick = ()=> mostrarDetalhes(paciente,index);
+            <div class="patient-footer">
+
+                <span>
+                    ${paciente.intensidade}
+                </span>
+
+                <span>
+                    ${paciente.status}
+                </span>
+
+            </div>
+
+        `;
 
         lista.appendChild(li);
     });
 
     totalPacientes.innerText = pacientes.length;
+
     totalEmergencias.innerText = emergencias;
-    totalAtendimento.innerText = atendimento;
-    contadorFila.innerText = pacientes.length + ' pacientes';
+
+    totalAtendimento.innerText = emAtendimento;
+
+    contadorLista.innerText =
+        `${pacientes.length} pacientes`;
 }
 
-function mostrarDetalhes(paciente,index){
 
-    const box = document.getElementById('detalhes-paciente');
+// ======================================
+// ABRIR PACIENTE
+// ======================================
+
+function abrirPaciente(index) {
+
+    const pacientes = carregarPacientes();
+
+    const paciente = pacientes[index];
+
+    const box =
+        document.getElementById('detalhes-paciente');
 
     box.innerHTML = `
-    
-        <div class="space-y-6">
 
-            <div>
+        <div class="patient-details">
 
-                <div class="flex justify-between items-start mb-4">
+            <div class="details-header">
 
-                    <div>
+                <div>
 
-                        <h2 class="text-3xl font-bold text-slate-800">
-                            ${paciente.nome}
-                        </h2>
+                    <p class="details-label">
+                        Paciente
+                    </p>
 
-                        <p class="text-slate-500 mt-2">
-                            Paciente em triagem
-                        </p>
+                    <h2>
+                        ${paciente.nome}
+                    </h2>
 
-                    </div>
+                </div>
 
-                    <span class="px-5 py-2 rounded-full font-bold ${corPrioridade(paciente.prioridade)}">
-                        ${paciente.prioridade}
+                <span class="priority ${paciente.prioridade.toLowerCase()}">
+                    ${paciente.prioridade}
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-card">
+
+                    <span>
+                        Data de nascimento
                     </span>
 
+                    <strong>
+                        ${paciente.nascimento}
+                    </strong>
+
+                </div>
+
+                <div class="detail-card">
+
+                    <span>
+                        Telefone
+                    </span>
+
+                    <strong>
+                        ${paciente.telefone}
+                    </strong>
+
+                </div>
+
+                <div class="detail-card">
+
+                    <span>
+                        Intensidade
+                    </span>
+
+                    <strong>
+                        ${paciente.intensidade}
+                    </strong>
+
+                </div>
+
+                <div class="detail-card">
+
+                    <span>
+                        Tempo dos sintomas
+                    </span>
+
+                    <strong>
+                        ${paciente.tempo}
+                    </strong>
+
                 </div>
 
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
 
-                <div class="bg-slate-50 rounded-2xl p-5">
-                    <p class="text-slate-400 text-sm">Telefone</p>
-                    <h4 class="font-bold mt-2">${paciente.telefone}</h4>
-                </div>
+            <div class="detail-section">
 
-                <div class="bg-slate-50 rounded-2xl p-5">
-                    <p class="text-slate-400 text-sm">Nascimento</p>
-                    <h4 class="font-bold mt-2">${paciente.nascimento}</h4>
-                </div>
-
-            </div>
-
-            <div class="bg-slate-50 rounded-2xl p-5">
-
-                <p class="text-slate-400 text-sm mb-3">
+                <p>
                     Sintomas
                 </p>
 
-                <p class="text-slate-700 leading-relaxed">
+                <div class="detail-box">
                     ${paciente.sintomas}
-                </p>
+                </div>
 
             </div>
 
-            <div class="bg-slate-50 rounded-2xl p-5">
 
-                <p class="text-slate-400 text-sm mb-3">
+            <div class="detail-section">
+
+                <p>
                     Alergias
                 </p>
 
-                <p class="text-slate-700">
+                <div class="detail-box">
+
                     ${paciente.alergias || 'Nenhuma informada'}
-                </p>
+
+                </div>
 
             </div>
 
-            <div class="grid grid-cols-2 gap-4 pt-4">
+
+            <div class="detail-section">
+
+                <p>
+                    Status atual
+                </p>
+
+                <div class="detail-box">
+
+                    ${paciente.status}
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
 
                 <button
-                    onclick="iniciarAtendimento(${index})"
-                    class="h-14 rounded-2xl bg-emerald-600 text-white font-bold">
+                    class="btn-start"
+                    onclick="iniciarAtendimento(${index})">
 
-                    Iniciar atendimento
+                    ▶ Iniciar atendimento
 
                 </button>
 
                 <button
-                    onclick="finalizarAtendimento(${index})"
-                    class="h-14 rounded-2xl bg-red-500 text-white font-bold">
+                    class="btn-finish"
+                    onclick="finalizarAtendimento(${index})">
 
-                    Finalizar
+                    ✓ Finalizar atendimento
 
                 </button>
 
             </div>
 
         </div>
+
     `;
 }
 
-function iniciarAtendimento(index){
 
-    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+// ======================================
+// INICIAR ATENDIMENTO
+// ======================================
+
+function iniciarAtendimento(index) {
+
+    const pacientes = carregarPacientes();
 
     pacientes[index].status = 'Em atendimento';
 
-    localStorage.setItem('pacientes',JSON.stringify(pacientes));
+    salvarPacientes(pacientes);
 
     atualizarDashboard();
-    mostrarDetalhes(pacientes[index],index);
+
+    abrirPaciente(index);
 }
 
-function finalizarAtendimento(index){
 
-    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+// ======================================
+// FINALIZAR ATENDIMENTO
+// ======================================
 
-    pacientes.splice(index,1);
+function finalizarAtendimento(index) {
 
-    localStorage.setItem('pacientes',JSON.stringify(pacientes));
+    const confirmar = confirm(
+        'Deseja finalizar este atendimento?'
+    );
+
+    if(!confirmar) return;
+
+    const pacientes = carregarPacientes();
+
+    pacientes[index].status = 'Finalizado';
+
+    salvarPacientes(pacientes);
 
     atualizarDashboard();
 
     document.getElementById('detalhes-paciente').innerHTML = `
-    
+
         <div class="empty-state">
 
             <div class="empty-icon">
@@ -221,23 +367,29 @@ function finalizarAtendimento(index){
                 Atendimento finalizado
             </h3>
 
+            <p>
+                O paciente foi marcado como finalizado.
+            </p>
+
         </div>
+
     `;
 }
 
-function corPrioridade(prioridade){
 
-    if(prioridade === 'Vermelho'){
-        return 'bg-red-100 text-red-600';
-    }
+// ======================================
+// ATUALIZAÇÃO AUTOMÁTICA
+// ======================================
 
-    if(prioridade === 'Amarelo'){
-        return 'bg-yellow-100 text-yellow-700';
-    }
+setInterval(() => {
 
-    if(prioridade === 'Verde'){
-        return 'bg-green-100 text-green-700';
-    }
+    atualizarDashboard();
 
-    return 'bg-blue-100 text-blue-700';
-}
+}, 2000);
+
+
+// ======================================
+// INICIALIZAÇÃO
+// ======================================
+
+atualizarDashboard();
