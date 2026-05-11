@@ -3,102 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vida+ Área Médica</title>
+    <title>Vida+ • Área Médica</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:wght@700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="area-medica.css">
 </head>
 
 <body>
 
-    <!-- FUNDO -->
-    <div class="medical-bg"></div>
-    <div class="medical-glow"></div>
-
     <!-- LOGIN -->
-    <section id="page-medico-login" class="medical-page">
+    <section id="page-login-medico" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
 
-        <div class="medical-card">
+        <div class="blur-bg-1"></div>
+        <div class="blur-bg-2"></div>
 
-            <div class="medical-icon">
-                🩺
-            </div>
+        <div class="login-card">
 
-            <h1 class="medical-title">
-                Área Médica
-            </h1>
+            <div class="mb-10 text-center">
 
-            <p class="medical-subtitle">
-                Cadastro e acesso restrito
-            </p>
+                <div class="logo-box">
+                    +
+                </div>
 
-            <!-- opções -->
-            <div class="medical-options">
+                <h1 class="title">
+                    Vida+
+                </h1>
 
-                <label class="medical-option active-option">
-                    <input type="radio" name="tipo-acesso" checked>
-                    <span>Acessar como médico</span>
-                </label>
-
-                <label class="medical-option">
-                    <input type="radio" name="tipo-acesso">
-                    <span>Cadastro de novo médico</span>
-                </label>
+                <p class="subtitle">
+                    Painel Médico
+                </p>
 
             </div>
 
-            <!-- formulário -->
-            <div class="medical-form">
+            <div class="space-y-5">
 
                 <div>
-
-                    <label class="medical-label">
-                        CRM
-                    </label>
+                    <label>CRM</label>
 
                     <input
                         type="text"
                         id="crm-medico"
-                        required
                         placeholder="Digite seu CRM"
-                        inputmode="numeric"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                        class="medical-input"
                     >
-
                 </div>
 
                 <div>
-
-                    <label class="medical-label">
-                        Senha
-                    </label>
+                    <label>Senha</label>
 
                     <input
                         type="password"
                         id="senha-medico"
-                        required
-                        placeholder="Sua senha"
-                        class="medical-input"
+                        placeholder="Digite sua senha"
                     >
-
                 </div>
 
-                <button
-                    onclick="loginMedico()"
-                    class="medical-button"
-                >
-                    🔒 Acessar
+                <button onclick="entrarSistema()">
+                    Entrar no sistema
                 </button>
 
-                <button
-                    onclick="window.location.href='index.html'"
-                    class="medical-back"
-                >
-                    ✕ Voltar
+                <button class="voltar" onclick="window.location.href='index.html'">
+                    ← Voltar para página inicial
                 </button>
 
             </div>
@@ -107,68 +74,153 @@
 
     </section>
 
-
     <!-- DASHBOARD -->
-    <section id="page-medico-dashboard" class="hidden medical-dashboard-page">
+    <section id="page-dashboard" class="hidden">
 
-        <header class="dashboard-header">
+        <aside class="sidebar">
 
             <div>
 
-                <h1 class="dashboard-title">
-                    Painel de Triagem
-                </h1>
+                <div class="sidebar-logo">
+                    <div class="mini-logo">+</div>
 
-                <p class="dashboard-subtitle">
-                    Controle da fila hospitalar
-                </p>
+                    <div>
+                        <h2>Vida+</h2>
+                        <p>Área Médica</p>
+                    </div>
+                </div>
+
+                <nav class="menu">
+
+                    <button class="menu-active">
+                        🩺 Dashboard
+                    </button>
+
+                    <button>
+                        📋 Pacientes
+                    </button>
+
+                    <button>
+                        🚨 Emergências
+                    </button>
+
+                    <button>
+                        📈 Relatórios
+                    </button>
+
+                </nav>
 
             </div>
 
-            <button
-                onclick="voltarLogin()"
-                class="dashboard-logout"
-            >
-                Sair
+            <button class="logout" onclick="logoutMedico()">
+                Sair do sistema
             </button>
 
-        </header>
+        </aside>
 
-        <!-- cards -->
-        <div class="dashboard-cards">
+        <main class="content">
 
-            <div class="dashboard-card">
-                <p>Total na fila</p>
-                <h2 id="total-fila">0</h2>
-            </div>
+            <!-- topo -->
+            <div class="topbar">
 
-            <div class="dashboard-card red-card">
-                <p>Emergências</p>
-                <h2 id="total-emergencias">0</h2>
-            </div>
+                <div>
+                    <h1>
+                        Painel de Triagem
+                    </h1>
 
-        </div>
+                    <p>
+                        Monitoramento em tempo real dos pacientes
+                    </p>
+                </div>
 
-        <!-- conteúdo -->
-        <div class="dashboard-main">
-
-            <div class="dashboard-list">
-
-                <p class="dashboard-placeholder">
-                    Lista de pacientes aparecerá aqui.
-                </p>
+                <div class="status-online">
+                    <span></span>
+                    Sistema online
+                </div>
 
             </div>
 
-            <div class="dashboard-details">
+            <!-- cards -->
+            <div class="cards-grid">
 
-                <p class="dashboard-placeholder">
-                    Informações do paciente.
-                </p>
+                <div class="info-card blue">
+
+                    <p>Total na fila</p>
+
+                    <h2 id="total-pacientes">
+                        0
+                    </h2>
+
+                </div>
+
+                <div class="info-card red">
+
+                    <p>Emergências</p>
+
+                    <h2 id="total-emergencias">
+                        0
+                    </h2>
+
+                </div>
+
+                <div class="info-card green">
+
+                    <p>Em atendimento</p>
+
+                    <h2 id="total-atendimento">
+                        0
+                    </h2>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- conteúdo -->
+            <div class="dashboard-grid">
+
+                <!-- fila -->
+                <div class="fila-box">
+
+                    <div class="box-header">
+
+                        <h3>
+                            Pacientes na fila
+                        </h3>
+
+                        <span id="contador-fila">
+                            0 pacientes
+                        </span>
+
+                    </div>
+
+                    <ul id="lista-dashboard"></ul>
+
+                </div>
+
+                <!-- detalhes -->
+                <div class="detalhes-box" id="detalhes-paciente">
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            🩺
+                        </div>
+
+                        <h3>
+                            Nenhum paciente selecionado
+                        </h3>
+
+                        <p>
+                            Clique em um paciente para visualizar o prontuário.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
 
     </section>
 
