@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vida+ Área Médica</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="area-medica.css">
+</head>
+
+<body>
+
+    <!-- FUNDO -->
+    <div class="medical-bg"></div>
+    <div class="medical-glow"></div>
+
+    <!-- LOGIN -->
+    <section id="page-medico-login" class="medical-page">
+
+        <div class="medical-card">
+
+            <div class="medical-icon">
+                🩺
+            </div>
+
+            <h1 class="medical-title">
+                Área Médica
+            </h1>
+
+            <p class="medical-subtitle">
+                Cadastro e acesso restrito
+            </p>
+
+            <!-- opções -->
+            <div class="medical-options">
+
+                <label class="medical-option active-option">
+                    <input type="radio" name="tipo-acesso" checked>
+                    <span>Acessar como médico</span>
+                </label>
+
+                <label class="medical-option">
+                    <input type="radio" name="tipo-acesso">
+                    <span>Cadastro de novo médico</span>
+                </label>
+
+            </div>
+
+            <!-- formulário -->
+            <div class="medical-form">
+
+                <div>
+
+                    <label class="medical-label">
+                        CRM
+                    </label>
+
+                    <input
+                        type="text"
+                        id="crm-medico"
+                        required
+                        placeholder="Digite seu CRM"
+                        inputmode="numeric"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        class="medical-input"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label class="medical-label">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha-medico"
+                        required
+                        placeholder="Sua senha"
+                        class="medical-input"
+                    >
+
+                </div>
+
+                <button
+                    onclick="loginMedico()"
+                    class="medical-button"
+                >
+                    🔒 Acessar
+                </button>
+
+                <button
+                    onclick="window.location.href='index.html'"
+                    class="medical-back"
+                >
+                    ✕ Voltar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section id="page-medico-dashboard" class="hidden medical-dashboard-page">
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1 class="dashboard-title">
+                    Painel de Triagem
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    Controle da fila hospitalar
+                </p>
+
+            </div>
+
+            <button
+                onclick="voltarLogin()"
+                class="dashboard-logout"
+            >
+                Sair
+            </button>
+
+        </header>
+
+        <!-- cards -->
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <p>Total na fila</p>
+                <h2 id="total-fila">0</h2>
+            </div>
+
+            <div class="dashboard-card red-card">
+                <p>Emergências</p>
+                <h2 id="total-emergencias">0</h2>
+            </div>
+
+        </div>
+
+        <!-- conteúdo -->
+        <div class="dashboard-main">
+
+            <div class="dashboard-list">
+
+                <p class="dashboard-placeholder">
+                    Lista de pacientes aparecerá aqui.
+                </p>
+
+            </div>
+
+            <div class="dashboard-details">
+
+                <p class="dashboard-placeholder">
+                    Informações do paciente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="area-medica.js"></script>
+
+</body>
+</html>
