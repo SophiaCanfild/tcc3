@@ -62,7 +62,7 @@
         </div>
 
         <!-- botão -->
-        <button onclick="goToPage('page-login')"
+        <button onclick="window.location.href='area-medica.html'"
             class="bg-blue-100 text-blue-700 px-6 py-3 rounded-2xl font-semibold hover:bg-blue-200 transition-all duration-300 shadow-sm">
             Acesso Médico
         </button>
@@ -671,47 +671,3 @@
     </div>
 
 </section>
-
-    <section id="page-login" class="hidden flex justify-center items-center h-screen p-6">
-        <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl">
-            <h1 class="font-display text-2xl mb-6 text-center text-slate-800">Acesso Restrito</h1>
-            <div class="space-y-4">
-                <input type="text" id="crm-medico" placeholder="CRM" class="w-full px-4 py-3 border rounded-xl">
-                <input type="password" id="senha-medico" placeholder="Senha" class="w-full px-4 py-3 border rounded-xl">
-                <button onclick="logarMedico()" class="w-full bg-blue-600 py-3 rounded-xl text-white font-bold">Entrar no Sistema</button>
-                <button onclick="goToPage('page-home')" class="w-full text-slate-400 text-sm">Voltar ao Início</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="page-dashboard" class="hidden p-6 h-screen flex flex-col">
-        <header class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-slate-800">Painel de Triagem</h1>
-            <button onclick="goToPage('page-login')" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-bold">Sair</button>
-        </header>
-
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-blue-500">
-                <p class="text-slate-500 text-sm">Total na Fila</p>
-                <span id="total-pacientes" class="text-3xl font-bold text-slate-800">0</span>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-500">
-                <p class="text-slate-500 text-sm">Emergências</p>
-                <span id="total-emergencias" class="text-3xl font-bold text-red-600">0</span>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6 flex-1 overflow-hidden">
-            <div class="md:col-span-2 bg-white rounded-2xl shadow-sm overflow-y-auto p-4">
-                <ul id="lista-dashboard" class="space-y-2"></ul>
-            </div>
-            <div id="detalhes-paciente" class="bg-slate-50 rounded-2xl p-6 border-2 border-dashed border-slate-200">
-                <p class="text-slate-400 text-center mt-10">Selecione um paciente para ver o prontuário</p>
-            </div>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
