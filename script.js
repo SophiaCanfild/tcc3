@@ -28,6 +28,9 @@ let pacientes = [
 
 let intensidadeSelecionada = "";
 
+// paciente que está usando a tela atual
+let pacienteAtual = null;
+
 
 // =========================
 // NAVEGAÇÃO
@@ -173,6 +176,8 @@ function entrarNaFila() {
 
     pacientes.push(novoPaciente);
 
+pacienteAtual = novoPaciente;
+
     // ordena por prioridade
     pacientes.sort((a, b) => a.peso - b.peso);
 
@@ -274,14 +279,17 @@ function atualizarFilaPublica() {
         lista.appendChild(li);
     });
 
-    // posição do paciente atual
-    const ultimaPos = pacientes.length;
+    // posição REAL do paciente atual
+const posicaoAtual =
+    pacientes.findIndex(
+        p => p.nome === pacienteAtual.nome
+    ) + 1;
 
-    posElem.innerText =
-        String(ultimaPos).padStart(2, '0') + 'º';
+posElem.innerText =
+    String(posicaoAtual).padStart(2, '0') + 'º';
 
-    statusElem.innerText =
-        pacientes[ultimaPos - 1].prioridade;
+statusElem.innerText =
+    pacienteAtual.prioridade;
 
     contador.innerText =
         `${pacientes.length} pacientes`;
