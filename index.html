@@ -392,22 +392,258 @@
 
 </section>
 
-    <section id="page-triagem" class="hidden p-6 md:p-12">
-        <div class="max-w-3xl mx-auto">
-            <button onclick="goToPage('page-cadastro')" class="text-emerald-800 font-medium mb-8">← Voltar</button>
-            <div class="bg-white rounded-3xl p-8 shadow-xl space-y-6">
-                <h1 class="font-display text-3xl">O que você está sentindo?</h1>
-                <textarea id="sintomas" placeholder="Descreva seus sintomas..." class="w-full px-4 py-3 rounded-xl border"></textarea>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Leve')">Leve</button>
-                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Moderada')">Moderada</button>
-                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Forte')">Forte</button>
-                    <button class="btn-intensidade p-2 border rounded-xl hover:bg-emerald-50" onclick="selecionarIntensidade(this, 'Intensa')">Intensa</button>
-                </div>
-                <button onclick="entrarNaFila()" class="w-full bg-emerald-800 text-white py-4 rounded-xl font-bold">Entrar na fila</button>
+    <section id="page-triagem" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
+
+    <!-- glow -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/40 blur-3xl rounded-full"></div>
+
+    <!-- NAVBAR -->
+    <nav class="relative z-10 flex justify-between items-center px-6 md:px-12 py-5 border-b border-emerald-100/80 bg-white/60 backdrop-blur-sm">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4v16m8-8H4"></path>
+                </svg>
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-black text-emerald-950 leading-none">
+                    Vida+
+                </h1>
+
+                <p class="text-sm text-emerald-800/60 mt-1">
+                    Cuidando de você com carinho
+                </p>
             </div>
         </div>
-    </section>
+
+        <!-- infos -->
+        <div class="hidden md:flex items-center gap-8 text-emerald-900/70 font-medium">
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a2 2 0 011.789 1.106l1.342 2.683a2 2 0 01-.445 2.32l-1.2 1.2a16 16 0 006.586 6.586l1.2-1.2a2 2 0 012.32-.445l2.683 1.342A2 2 0 0121 18.72V22a2 2 0 01-2 2h-1C9.163 24 0 14.837 0 3V2a2 2 0 012-2h1z"/>
+                </svg>
+
+                <span>192 — Emergência</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+
+                <span>24 horas</span>
+            </div>
+        </div>
+
+        <!-- botão -->
+        <button onclick="goToPage('page-login')"
+            class="bg-blue-100 text-blue-700 px-6 py-3 rounded-2xl font-semibold hover:bg-blue-200 transition-all duration-300 shadow-sm">
+            Acesso Médico
+        </button>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
+
+        <!-- voltar -->
+        <button onclick="goToPage('page-cadastro')"
+            class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
+
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+
+            Voltar
+        </button>
+
+        <!-- progresso -->
+        <div class="flex items-center mb-14">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                2
+            </div>
+
+            <div class="flex-1 h-[2px] bg-slate-200 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+        </div>
+
+        <!-- título -->
+        <div class="mb-10">
+            <h1 class="font-display text-6xl leading-none text-emerald-950">
+                Formulário médico
+            </h1>
+
+            <p class="mt-4 text-xl text-emerald-900/55">
+                Conte-nos o que está sentindo para priorizarmos seu atendimento.
+            </p>
+        </div>
+
+        <!-- CARD -->
+        <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
+
+            <div class="space-y-8">
+
+                <!-- sintomas -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        O que você está sentindo?
+                    </label>
+
+                    <textarea
+                        id="sintomas"
+                        placeholder="Descreva seus sintomas principais..."
+                        class="w-full h-40 px-6 py-5 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg resize-none outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    ></textarea>
+                </div>
+
+                <!-- tempo -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Há quanto tempo está com esses sintomas?
+                    </label>
+
+                    <select
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    >
+                        <option>Selecione...</option>
+                        <option>Há algumas horas</option>
+                        <option>Desde ontem</option>
+                        <option>Há alguns dias</option>
+                        <option>Há mais de uma semana</option>
+                    </select>
+                </div>
+
+                <!-- intensidade -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-4">
+                        Qual a intensidade dos sintomas?
+                    </label>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                        <!-- leve -->
+                        <button
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-300 hover:bg-emerald-50 transition-all"
+                            onclick="selecionarIntensidade(this, 'Leve')">
+
+                            <div class="text-2xl mb-3">🙂</div>
+
+                            <h3 class="font-bold text-emerald-950">
+                                Leve
+                            </h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Desconforto pequeno
+                            </p>
+                        </button>
+
+                        <!-- moderada -->
+                        <button
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-300 hover:bg-emerald-50 transition-all"
+                            onclick="selecionarIntensidade(this, 'Moderada')">
+
+                            <div class="text-2xl mb-3">😕</div>
+
+                            <h3 class="font-bold text-emerald-950">
+                                Moderada
+                            </h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Incômodo constante
+                            </p>
+                        </button>
+
+                        <!-- forte -->
+                        <button
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-300 hover:bg-emerald-50 transition-all"
+                            onclick="selecionarIntensidade(this, 'Forte')">
+
+                            <div class="text-2xl mb-3">😣</div>
+
+                            <h3 class="font-bold text-emerald-950">
+                                Forte
+                            </h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Muita dor
+                            </p>
+                        </button>
+
+                        <!-- intensa -->
+                        <button
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-300 hover:bg-emerald-50 transition-all"
+                            onclick="selecionarIntensidade(this, 'Intensa')">
+
+                            <div class="text-2xl mb-3">🚨</div>
+
+                            <h3 class="font-bold text-emerald-950">
+                                Intensa
+                            </h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Insuportável
+                            </p>
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- alergias -->
+                <div>
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Tem alguma alergia ou condição pré-existente?
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="Ex: Dipirona, asma, diabetes... (ou deixe vazio)"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all"
+                    >
+                </div>
+
+                <!-- botão -->
+                <button
+                    onclick="entrarNaFila()"
+                    class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg transition-all duration-300 shadow-xl shadow-emerald-900/10 flex items-center justify-center gap-3"
+                >
+                    Entrar na fila
+
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+    <footer
+        class="absolute bottom-6 left-1/2 -translate-x-1/2 text-emerald-900/40 text-sm">
+        © Vida+ — Sistema de triagem demonstrativo
+    </footer>
+
+</section>
 
     <section id="page-fila" class="hidden p-6 md:p-12 max-w-3xl mx-auto">
         <div class="bg-emerald-800 text-white rounded-3xl p-8 mb-6 text-center">
