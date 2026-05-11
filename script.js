@@ -52,17 +52,26 @@ function goToPage(pageId) {
 function validarCadastro() {
 
     const nome =
-        document.getElementById('nome-paciente').value.trim();
+        document.getElementById('nome-paciente');
 
     const nascimento =
-        document.getElementById('nascimento-paciente').value;
+        document.getElementById('nascimento-paciente');
 
     const telefone =
-        document.getElementById('telefone-paciente').value.trim();
+        document.getElementById('telefone-paciente');
 
-    if (!nome || !nascimento || !telefone) {
+    // verifica usando validação nativa HTML
+    if (
+        !nome.checkValidity() ||
+        !nascimento.checkValidity() ||
+        !telefone.checkValidity()
+    ) {
 
-        alert("Preencha todos os campos obrigatórios.");
+        nome.reportValidity();
+
+        nascimento.reportValidity();
+
+        telefone.reportValidity();
 
         return;
     }
@@ -97,23 +106,33 @@ function entrarNaFila() {
         document.getElementById('nome-paciente').value.trim();
 
     const sintomas =
-        document.getElementById('sintomas').value.trim();
+        document.getElementById('sintomas');
 
     const tempo =
-        document.getElementById('tempo-sintomas').value;
+        document.getElementById('tempo-sintomas');
 
     const alergias =
         document.getElementById('alergias').value.trim();
 
-    // validação
-    if (!sintomas || !tempo || !intensidadeSelecionada) {
+    // validação nativa
+    if (
+        !sintomas.checkValidity() ||
+        !tempo.checkValidity() ||
+        !intensidadeSelecionada
+    ) {
 
-        alert("Preencha todos os campos obrigatórios.");
+        sintomas.reportValidity();
+
+        tempo.reportValidity();
+
+        if (!intensidadeSelecionada) {
+            alert("Selecione a intensidade dos sintomas.");
+        }
 
         return;
     }
 
-    // prioridade hospitalar
+    // prioridades hospitalares
     let prioridade = "Azul";
     let peso = 3;
 
@@ -144,8 +163,8 @@ function entrarNaFila() {
     const novoPaciente = {
 
         nome,
-        sintomas,
-        tempo,
+        sintomas: sintomas.value,
+        tempo: tempo.value,
         alergias,
         intensidade: intensidadeSelecionada,
         prioridade,
@@ -255,7 +274,7 @@ function atualizarFilaPublica() {
         lista.appendChild(li);
     });
 
-    // posição do último paciente
+    // posição do paciente atual
     const ultimaPos = pacientes.length;
 
     posElem.innerText =

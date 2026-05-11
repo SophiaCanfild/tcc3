@@ -223,18 +223,24 @@
 
 </section>
 
+<!-- ====================================== -->
+<!-- PAGE CADASTRO -->
+<!-- ====================================== -->
+
 <section id="page-cadastro" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
 
     <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/40 blur-3xl rounded-full"></div>
 
     <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
 
+        <!-- voltar -->
         <button onclick="goToPage('page-home')"
             class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
 
             ← Voltar
         </button>
 
+        <!-- steps -->
         <div class="flex items-center mb-14">
 
             <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
@@ -252,8 +258,10 @@
             <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
                 3
             </div>
+
         </div>
 
+        <!-- título -->
         <div class="mb-10">
 
             <h1 class="font-display text-6xl leading-none text-emerald-950">
@@ -263,13 +271,17 @@
             <p class="mt-4 text-xl text-emerald-900/55">
                 Preencha seus dados para começar o atendimento.
             </p>
+
         </div>
 
+        <!-- card -->
         <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
 
             <div class="space-y-8">
 
+                <!-- nome -->
                 <div>
+
                     <label class="block text-emerald-900 font-semibold mb-3">
                         Nome completo
                     </label>
@@ -277,12 +289,16 @@
                     <input
                         type="text"
                         id="nome-paciente"
+                        required
                         placeholder="Maria da Silva"
-                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
                     >
+
                 </div>
 
+                <!-- nascimento -->
                 <div>
+
                     <label class="block text-emerald-900 font-semibold mb-3">
                         Data de nascimento
                     </label>
@@ -290,11 +306,15 @@
                     <input
                         type="date"
                         id="nascimento-paciente"
-                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none"
+                        required
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
                     >
+
                 </div>
 
+                <!-- telefone -->
                 <div>
+
                     <label class="block text-emerald-900 font-semibold mb-3">
                         Telefone
                     </label>
@@ -302,17 +322,22 @@
                     <input
                         type="tel"
                         id="telefone-paciente"
+                        required
                         placeholder="(11) 99999-9999"
                         inputmode="numeric"
                         oninput="this.value = this.value.replace(/[^0-9()-\s]/g, '')"
-                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
                     >
+
                 </div>
 
+                <!-- botão -->
                 <button
                     onclick="validarCadastro()"
                     class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg">
-                    Continuar para triagem
+
+                    Continuar para triagem →
+
                 </button>
 
             </div>
@@ -323,16 +348,23 @@
 
 </section>
 
+
+<!-- ====================================== -->
+<!-- PAGE TRIAGEM -->
+<!-- ====================================== -->
+
 <section id="page-triagem" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
 
     <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
 
+        <!-- voltar -->
         <button onclick="goToPage('page-cadastro')"
             class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
 
             ← Voltar
         </button>
 
+        <!-- steps -->
         <div class="flex items-center mb-14">
 
             <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
@@ -350,8 +382,10 @@
             <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
                 3
             </div>
+
         </div>
 
+        <!-- título -->
         <div class="mb-10">
 
             <h1 class="font-display text-6xl leading-none text-emerald-950">
@@ -361,86 +395,119 @@
             <p class="mt-4 text-xl text-emerald-900/55">
                 Conte-nos o que está sentindo.
             </p>
+
         </div>
 
+        <!-- card -->
         <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
 
             <div class="space-y-8">
 
+                <!-- sintomas -->
                 <div>
+
                     <label class="block text-emerald-900 font-semibold mb-3">
                         O que você está sentindo?
                     </label>
 
                     <textarea
                         id="sintomas"
+                        required
                         placeholder="Descreva seus sintomas..."
-                        class="w-full h-40 px-6 py-5 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg resize-none outline-none"
+                        class="w-full h-40 px-6 py-5 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg resize-none outline-none focus:border-emerald-500"
                     ></textarea>
+
                 </div>
 
+                <!-- tempo -->
                 <div>
+
                     <label class="block text-emerald-900 font-semibold mb-3">
                         Há quanto tempo está com esses sintomas?
                     </label>
 
                     <select
                         id="tempo-sintomas"
-                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none"
+                        required
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
                     >
+
                         <option value="">Selecione...</option>
                         <option>Há algumas horas</option>
                         <option>Desde ontem</option>
                         <option>Há alguns dias</option>
                         <option>Há mais de uma semana</option>
+
                     </select>
+
                 </div>
 
+                <!-- intensidade -->
                 <div>
 
                     <label class="block text-emerald-900 font-semibold mb-4">
-                        Intensidade
+                        Intensidade dos sintomas
                     </label>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                         <button
-                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left"
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
                             onclick="selecionarIntensidade(this, 'Leve')">
 
-                            <h3 class="font-bold text-emerald-950">
-                                Leve
-                            </h3>
+                            <div class="text-2xl mb-3">🙂</div>
+
+                            <h3 class="font-bold text-emerald-950">Leve</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Desconforto pequeno
+                            </p>
 
                         </button>
 
                         <button
-                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left"
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
                             onclick="selecionarIntensidade(this, 'Moderada')">
 
-                            <h3 class="font-bold text-emerald-950">
-                                Moderada
-                            </h3>
+                            <div class="text-2xl mb-3">😕</div>
+
+                            <h3 class="font-bold text-emerald-950">Moderada</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Incomoda bastante
+                            </p>
 
                         </button>
 
                         <button
-                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left"
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
                             onclick="selecionarIntensidade(this, 'Forte')">
 
-                            <h3 class="font-bold text-emerald-950">
-                                Forte
-                            </h3>
+                            <div class="text-2xl mb-3">😣</div>
+
+                            <h3 class="font-bold text-emerald-950">Forte</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Muita dor
+                            </p>
 
                         </button>
 
                         <button
-                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left"
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
                             onclick="selecionarIntensidade(this, 'Intensa')">
 
-                            <h3 class="font-bold text-emerald-950">
-                                Intensa
-                            </h3>
+                            <div class="text-2xl mb-3">🚨</div>
+
+                            <h3 class="font-bold text-emerald-950">Intensa</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Insuportável
+                            </p>
 
                         </button>
 
@@ -448,6 +515,7 @@
 
                 </div>
 
+                <!-- alergias -->
                 <div>
 
                     <label class="block text-emerald-900 font-semibold mb-3">
@@ -458,14 +526,18 @@
                         type="text"
                         id="alergias"
                         placeholder="Opcional"
-                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
                     >
+
                 </div>
 
+                <!-- botão -->
                 <button
                     onclick="entrarNaFila()"
                     class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg">
-                    Entrar na fila
+
+                    Entrar na fila →
+
                 </button>
 
             </div>
@@ -476,26 +548,60 @@
 
 </section>
 
-<section id="page-fila" class="hidden min-h-screen bg-[#f4fbf7]">
 
-    <main class="max-w-5xl mx-auto px-6 md:px-10 py-10">
+<!-- ====================================== -->
+<!-- PAGE FILA -->
+<!-- ====================================== -->
 
-        <div class="bg-[#118344] rounded-[34px] p-10 text-white">
+<section id="page-fila" class="hidden min-h-screen bg-[#f4fbf7] py-14 px-6">
 
-            <p class="text-white/70 text-sm font-medium mb-5">
-                ● Você está na fila
+    <div class="max-w-5xl mx-auto">
+
+        <!-- steps -->
+        <div class="flex items-center mb-10">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+
+        </div>
+
+        <!-- card verde -->
+        <div class="bg-emerald-700 rounded-[36px] p-10 text-white mb-8">
+
+            <p class="text-white/70 text-sm mb-4">
+                Você está na fila
             </p>
 
-            <h1 id="posicao-fila"
-                class="font-display text-[110px] leading-none">
-                01º
-            </h1>
+            <div class="flex items-end gap-4 mb-10">
 
-            <div class="grid grid-cols-2 gap-10 mt-8">
+                <h1 id="posicao-fila" class="font-display text-8xl leading-none">
+                    01º
+                </h1>
+
+                <span class="mb-3 text-white/70">
+                    na fila
+                </span>
+
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 border-t border-white/20 pt-8">
 
                 <div>
 
-                    <p class="uppercase text-xs tracking-widest text-white/50 mb-2">
+                    <p class="text-white/60 text-sm uppercase tracking-wider mb-2">
                         Tempo estimado
                     </p>
 
@@ -507,12 +613,12 @@
 
                 <div>
 
-                    <p class="uppercase text-xs tracking-widest text-white/50 mb-2">
+                    <p class="text-white/60 text-sm uppercase tracking-wider mb-2">
                         Prioridade
                     </p>
 
                     <h3 id="status-prioridade" class="text-3xl font-bold">
-                        Vermelho
+                        Verde
                     </h3>
 
                 </div>
@@ -521,41 +627,48 @@
 
         </div>
 
-        <div class="bg-white rounded-[34px] p-8 mt-6">
+        <!-- lista -->
+        <div class="bg-white rounded-[36px] p-8 shadow-[0_20px_80px_rgba(16,185,129,0.10)]">
 
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center justify-between mb-6">
 
                 <h2 class="font-display text-3xl text-emerald-950">
                     Fila de atendimento
                 </h2>
 
                 <span id="contador-pacientes"
-                    class="text-emerald-900/40 text-sm">
+                    class="text-emerald-900/50 font-medium">
                     0 pacientes
                 </span>
 
             </div>
 
-            <ul id="lista-pacientes" class="space-y-3"></ul>
+            <ul id="lista-pacientes" class="space-y-4"></ul>
 
-            <div class="border-t border-emerald-100 mt-8 pt-6 grid md:grid-cols-2 gap-4">
+            <!-- botões -->
+            <div class="grid md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100">
 
-                <button onclick="goToPage('page-home')"
-                    class="h-14 rounded-2xl border border-emerald-700 text-emerald-700 font-semibold">
-                    Tela inicial
+                <button
+                    onclick="goToPage('page-home')"
+                    class="h-14 rounded-2xl border border-emerald-700 text-emerald-700 font-bold hover:bg-emerald-50">
+
+                    ⌂ Tela inicial
+
                 </button>
 
                 <button
                     onclick="confirmarCancelamento()"
-                    class="h-14 rounded-2xl bg-red-50 text-red-600 font-semibold">
-                    Cancelar atendimento
+                    class="h-14 rounded-2xl bg-red-50 text-red-600 font-bold hover:bg-red-100">
+
+                    ✕ Cancelar atendimento
+
                 </button>
 
             </div>
 
         </div>
 
-    </main>
+    </div>
 
 </section>
 
