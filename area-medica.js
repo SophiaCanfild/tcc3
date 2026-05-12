@@ -1,3 +1,32 @@
+function loginMedico(){
+
+    const crm =
+        document.getElementById('crm-medico').value;
+
+    const senha =
+        document.getElementById('senha-medico').value;
+
+
+    if(!crm || !senha){
+
+        alert('Preencha todos os campos.');
+
+        return;
+    }
+
+
+    document
+        .getElementById('page-login')
+        .classList.add('hidden');
+
+
+    document
+        .getElementById('page-dashboard')
+        .classList.remove('hidden');
+
+
+    atualizarDashboard();
+}
 // ======================================
 // RELÓGIO
 // ======================================

@@ -19,68 +19,117 @@
 
 <body>
 
-<!-- ================================= -->
-<!-- LOGIN -->
-<!-- ================================= -->
+<!-- LOGIN MÉDICO -->
+<section id="page-login" class="medical-page">
 
-<section id="page-login" class="login-page">
+    <div class="medical-glow"></div>
 
-    <div class="login-glow"></div>
+    <div class="medical-card">
 
-    <div class="login-card">
-
-        <div class="login-icon">
-            +
+        <!-- ÍCONE -->
+        <div class="medical-icon">
+            🩺
         </div>
 
-        <h1>
+        <!-- TÍTULO -->
+        <h1 class="medical-title">
             Área Médica
         </h1>
 
-        <p>
-            Acesso exclusivo para profissionais autorizados
+        <p class="medical-subtitle">
+            Cadastro e acesso restrito
         </p>
 
-        <div class="login-form">
 
+        <!-- OPÇÕES -->
+        <div class="medical-options">
+
+            <label class="medical-option active-option">
+
+                <input
+                    type="radio"
+                    name="tipo-acesso"
+                    checked
+                >
+
+                <span>
+                    Acessar como médico
+                </span>
+
+            </label>
+
+            <label class="medical-option">
+
+                <input
+                    type="radio"
+                    name="tipo-acesso"
+                >
+
+                <span>
+                    Cadastro de novo médico
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <!-- FORM -->
+        <div class="medical-form">
+
+            <!-- CRM -->
             <div>
 
-                <label>
+                <label class="medical-label">
                     CRM
                 </label>
 
                 <input
                     type="text"
                     id="crm-medico"
+                    required
                     placeholder="Digite seu CRM"
+                    inputmode="numeric"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                    class="medical-input"
                 >
 
             </div>
 
+
+            <!-- SENHA -->
             <div>
 
-                <label>
+                <label class="medical-label">
                     Senha
                 </label>
 
                 <input
                     type="password"
                     id="senha-medico"
-                    placeholder="Digite sua senha"
+                    required
+                    placeholder="Sua senha"
+                    class="medical-input"
                 >
 
             </div>
 
-            <button onclick="entrarSistema()">
-                Entrar no sistema →
+
+            <!-- BOTÃO -->
+            <button
+                onclick="loginMedico()"
+                class="medical-button"
+            >
+                🔒 Acessar
             </button>
 
+
+            <!-- VOLTAR -->
             <button
-                class="voltar-btn"
-                onclick="window.location.href='index.html'">
-
-                ← Voltar ao início
-
+                onclick="window.location.href='index.html'"
+                class="medical-back"
+            >
+                ✕ Voltar
             </button>
 
         </div>
@@ -88,7 +137,6 @@
     </div>
 
 </section>
-
 
 <!-- ================================= -->
 <!-- DASHBOARD -->
