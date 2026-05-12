@@ -183,7 +183,16 @@ pacienteAtual = novoPaciente;
 
     atualizarFilaPublica();
 
-    goToPage('page-fila');
+    pacientes.push(novoPaciente);
+
+localStorage.setItem(
+    'pacientes',
+    JSON.stringify(pacientes)
+);
+
+atualizarFilaPublica();
+
+goToPage('page-fila');
 }
 
 

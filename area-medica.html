@@ -58,17 +58,9 @@
 
             </label>
 
-            <label class="medical-option">
-
-                <input
-                    type="radio"
-                    name="tipo-acesso"
-                >
-
-                <span>
-                    Cadastro de novo médico
-                </span>
-
+            <label class="medical-option" onclick="mostrarCadastroMedico()">
+               <input type="radio" name="tipo-acesso">
+               <span>Cadastro de novo médico</span>
             </label>
 
         </div>
@@ -95,7 +87,61 @@
                 >
 
             </div>
+            <!-- CADASTRO MÉDICO -->
+<div
+    id="cadastro-medico-box"
+    class="medical-form hidden mt-8"
+>
 
+    <div>
+        <label class="medical-label">
+            Nome completo
+        </label>
+
+        <input
+            type="text"
+            id="novo-medico"
+            placeholder="Digite seu nome"
+            class="medical-input"
+        >
+    </div>
+
+    <div>
+        <label class="medical-label">
+            CRM
+        </label>
+
+        <input
+            type="text"
+            id="novo-crm"
+            placeholder="CRM"
+            inputmode="numeric"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            class="medical-input"
+        >
+    </div>
+
+    <div>
+        <label class="medical-label">
+            Senha
+        </label>
+
+        <input
+            type="password"
+            id="nova-senha"
+            placeholder="Crie uma senha"
+            class="medical-input"
+        >
+    </div>
+
+    <button
+        onclick="cadastrarMedico()"
+        class="medical-button"
+    >
+        ➕ Criar cadastro
+    </button>
+
+</div>
 
             <!-- SENHA -->
             <div>

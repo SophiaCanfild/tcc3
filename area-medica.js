@@ -1,3 +1,9 @@
+function carregarPacientes(){
+
+    return JSON.parse(
+        localStorage.getItem('pacientes')
+    ) || [];
+}
 function loginMedico(){
 
     const crm =
@@ -421,4 +427,47 @@ setInterval(() => {
 // INICIALIZAÇÃO
 // ======================================
 
+atualizarDashboard();
+// =========================
+// MOSTRAR CADASTRO
+// =========================
+
+function mostrarCadastroMedico(){
+
+    document
+        .getElementById('cadastro-medico-box')
+        .classList.remove('hidden');
+}
+
+
+
+// =========================
+// CADASTRAR MÉDICO
+// =========================
+
+function cadastrarMedico(){
+
+    const nome =
+        document.getElementById('novo-medico').value;
+
+    const crm =
+        document.getElementById('novo-crm').value;
+
+    const senha =
+        document.getElementById('nova-senha').value;
+
+
+    if(!nome || !crm || !senha){
+
+        alert('Preencha todos os campos.');
+
+        return;
+    }
+
+    alert('Cadastro médico realizado com sucesso!');
+
+    document
+        .getElementById('cadastro-medico-box')
+        .classList.add('hidden');
+}
 atualizarDashboard();
