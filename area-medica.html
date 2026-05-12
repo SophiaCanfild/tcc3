@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Vida+ • Área Médica</title>
+    <title>Vida+ Área Médica</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -19,7 +19,84 @@
 
 <body>
 
-    <!-- SIDEBAR -->
+<!-- ================================= -->
+<!-- LOGIN -->
+<!-- ================================= -->
+
+<section id="page-login" class="login-page">
+
+    <div class="login-glow"></div>
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            +
+        </div>
+
+        <h1>
+            Área Médica
+        </h1>
+
+        <p>
+            Acesso exclusivo para profissionais autorizados
+        </p>
+
+        <div class="login-form">
+
+            <div>
+
+                <label>
+                    CRM
+                </label>
+
+                <input
+                    type="text"
+                    id="crm-medico"
+                    placeholder="Digite seu CRM"
+                >
+
+            </div>
+
+            <div>
+
+                <label>
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha-medico"
+                    placeholder="Digite sua senha"
+                >
+
+            </div>
+
+            <button onclick="entrarSistema()">
+                Entrar no sistema →
+            </button>
+
+            <button
+                class="voltar-btn"
+                onclick="window.location.href='index.html'">
+
+                ← Voltar ao início
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================= -->
+<!-- DASHBOARD -->
+<!-- ================================= -->
+
+<section id="page-dashboard" class="hidden dashboard-page">
+
+    <!-- sidebar -->
 
     <aside class="sidebar">
 
@@ -28,7 +105,7 @@
             <div class="logo-box">
 
                 <div class="logo-icon">
-                    ✚
+                    +
                 </div>
 
                 <div>
@@ -38,197 +115,133 @@
                     </h1>
 
                     <p>
-                        Central médica
+                        Painel Médico
                     </p>
 
                 </div>
 
             </div>
 
-            <nav class="menu">
 
-                <button class="menu-item active">
-                    🏥 Dashboard
-                </button>
+            <div class="sidebar-info">
 
-                <button class="menu-item">
-                    📋 Triagem
-                </button>
+                <div class="info-card">
 
-                <button class="menu-item">
-                    🚑 Emergências
-                </button>
+                    <span>
+                        Pacientes
+                    </span>
 
-                <button class="menu-item">
-                    👨‍⚕️ Atendimentos
-                </button>
+                    <strong id="total-pacientes">
+                        0
+                    </strong>
 
-            </nav>
+                </div>
+
+                <div class="info-card red">
+
+                    <span>
+                        Emergências
+                    </span>
+
+                    <strong id="total-emergencias">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="info-card blue">
+
+                    <span>
+                        Em atendimento
+                    </span>
+
+                    <strong id="total-atendimento">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="doctor-box">
 
-            <div class="doctor-avatar">
-                DR
-            </div>
+        <button
+            class="logout-btn"
+            onclick="logoutMedico()">
 
-            <div>
+            Encerrar sessão
 
-                <strong>
-                    Dr. Responsável
-                </strong>
-
-                <p>
-                    Clínica Geral
-                </p>
-
-            </div>
-
-        </div>
+        </button>
 
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- conteúdo -->
 
     <main class="main-content">
 
-        <!-- BANNER -->
+        <!-- top -->
 
-        <div class="welcome-banner">
+        <header class="topbar">
 
             <div>
-
-                <p class="welcome-mini">
-                    Central hospitalar Vida+
-                </p>
 
                 <h2>
-                    Monitoramento inteligente de triagem
+                    Central de Atendimento
                 </h2>
 
-                <p class="welcome-text">
-                    Acompanhe pacientes em tempo real,
-                    priorize emergências e gerencie
-                    atendimentos hospitalares com rapidez.
-                </p>
-
-            </div>
-
-            <div class="welcome-status">
-
-                <span class="status-dot"></span>
-
-                Sistema sincronizado
-
-            </div>
-
-        </div>
-
-
-        <!-- TOPBAR -->
-
-        <div class="topbar">
-
-            <div>
-
-                <h1>
-                    Painel Médico
-                </h1>
-
                 <p>
-                    Controle hospitalar em tempo real
+                    Monitoramento em tempo real
                 </p>
 
             </div>
 
-            <div class="topbar-actions">
+            <div class="clock-box" id="clock-box">
 
-                <div class="clock-box" id="clock-box">
-                    00:00
-                </div>
-
-                <button onclick="logoutMedico()">
-                    Encerrar sessão
-                </button>
+                00:00
 
             </div>
 
-        </div>
+        </header>
 
 
-        <!-- CARDS -->
-
-        <div class="stats-grid">
-
-            <div class="stat-card">
-
-                <p>
-                    Total na fila
-                </p>
-
-                <h3 id="total-pacientes">
-                    0
-                </h3>
-
-            </div>
-
-            <div class="stat-card red">
-
-                <p>
-                    Emergências
-                </p>
-
-                <h3 id="total-emergencias">
-                    0
-                </h3>
-
-            </div>
-
-            <div class="stat-card blue">
-
-                <p>
-                    Em atendimento
-                </p>
-
-                <h3 id="total-atendimento">
-                    0
-                </h3>
-
-            </div>
-
-        </div>
-
-
-        <!-- GRID -->
+        <!-- conteúdo principal -->
 
         <div class="dashboard-grid">
 
-            <!-- LISTA -->
+            <!-- lista -->
 
-            <div class="patients-box">
+            <div class="patients-card">
 
-                <div class="box-header">
+                <div class="patients-header">
 
-                    <h2>
-                        Pacientes na fila
-                    </h2>
+                    <div>
 
-                    <span id="contador-lista">
-                        0 pacientes
-                    </span>
+                        <h3>
+                            Fila de Pacientes
+                        </h3>
+
+                        <p id="contador-lista">
+                            0 pacientes
+                        </p>
+
+                    </div>
 
                 </div>
 
-                <ul id="lista-dashboard"></ul>
+                <ul id="lista-dashboard">
+
+                </ul>
 
             </div>
 
 
-            <!-- DETALHES -->
+            <!-- detalhes -->
 
-            <div class="details-box" id="detalhes-paciente">
+            <div
+                class="details-panel"
+                id="detalhes-paciente">
 
                 <div class="empty-state">
 
@@ -241,8 +254,7 @@
                     </h3>
 
                     <p>
-                        Clique em um paciente da fila
-                        para visualizar o prontuário.
+                        Clique em um paciente para visualizar o prontuário completo.
                     </p>
 
                 </div>
@@ -253,7 +265,9 @@
 
     </main>
 
-    <script src="area-medica.js"></script>
+</section>
+
+<script src="area-medica.js"></script>
 
 </body>
 </html>
