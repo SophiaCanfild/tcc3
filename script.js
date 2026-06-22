@@ -45,13 +45,18 @@ function selecionarIntensidade(botao, valor) {
 }
 
 // =========================
-// ENTRAR NA FILA (SUPABASE)
+// ENTRAR NA FILA (SUPABASE - Adaptado ao seu esquema)
 // =========================
 async function entrarNaFila() {
     const nome = document.getElementById('nome-paciente').value.trim();
     const sintomas = document.getElementById('sintomas');
     const tempo = document.getElementById('tempo-sintomas');
     const alergias = document.getElementById('alergias').value.trim();
+
+    if (!nome) {
+        alert("Por favor, informe o nome do paciente.");
+        return;
+    }
 
     if (!sintomas.checkValidity() || !tempo.checkValidity() || !intensidadeSelecionada) {
         sintomas.reportValidity();
@@ -60,6 +65,7 @@ async function entrarNaFila() {
         return;
     }
 
+    // Define prioridade e peso
     let prioridade = "Azul";
     let peso = 3;
     if (intensidadeSelecionada === "Intensa") { prioridade = "Vermelho"; peso = 0; }
@@ -67,15 +73,22 @@ async function entrarNaFila() {
     else if (intensidadeSelecionada === "Moderada") { prioridade = "Verde"; peso = 2; }
 
     const novoPaciente = {
-        nome,
+        nome: nome,
         sintomas: sintomas.value,
         tempo: tempo.value,
-        alergias,
+        alergias: alergias || null,
         intensidade: intensidadeSelecionada,
-        prioridade,
-        peso,
+        prioridade: prioridade,
+        peso: peso,
         status: "Aguardando",
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
+        
+        // Campos obrigatórios ou importantes do seu banco
+        id_usuario: null,
+        cpf: null,
+        telefone: null,
+        data_nascimento: null,
+        sexo: null
     };
 
     try {
@@ -83,8 +96,8 @@ async function entrarNaFila() {
             alert("Erro: Supabase não inicializado. Usando modo local.");
             pacientes.push(novoPaciente);
             pacienteAtual = novoPaciente;
-            atualizarFilaPublica();
             goToPage('page-fila');
+            atualizarFilaPublica();
             return;
         }
 
@@ -95,18 +108,30 @@ async function entrarNaFila() {
 
         if (error) throw error;
 
+        console.log("✅ Paciente cadastrado com sucesso:", data[0]);
+
         pacienteAtual = data[0];
-        alert("✅ Cadastro realizado com sucesso!");
+        alert("✅ Cadastro realizado com sucesso! Você foi adicionado à fila.");
+
+        // Limpa o formulário
+        document.getElementById('nome-paciente').value = '';
+        sintomas.value = '';
+        tempo.value = '';
+        document.getElementById('alergias').value = '';
+        intensidadeSelecionada = "";
+
         goToPage('page-fila');
         carregarPacientesDoSupabase();
 
     } catch (error) {
         console.error("Erro Supabase:", error);
-        alert("Erro no Supabase → usando modo local.");
+        alert("Erro ao salvar no banco: " + error.message);
+        
+        // Fallback local em caso de erro
         pacientes.push(novoPaciente);
         pacienteAtual = novoPaciente;
-        atualizarFilaPublica();
         goToPage('page-fila');
+        atualizarFilaPublica();
     }
 }
 
