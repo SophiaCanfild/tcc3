@@ -1,5 +1,5 @@
 // =========================
-// BANCO DE DADOS SIMULADO
+// BANCO DE DADOS SIMULADO (mantido como fallback)
 // =========================
 
 let pacientes = [
@@ -31,6 +31,12 @@ let intensidadeSelecionada = "";
 // paciente que está usando a tela atual
 let pacienteAtual = null;
 
+
+// =========================
+// SUPABASE
+// =========================
+
+let supabaseClient = null; // será preenchido pelo supabase.js
 
 // =========================
 // NAVEGAÇÃO
@@ -100,101 +106,107 @@ function selecionarIntensidade(botao, valor) {
 
 
 // =========================
-// ENTRAR NA FILA
+// ENTRAR NA FILA (SUPABASE)
 // =========================
 
-function entrarNaFila() {
+async function entrarNaFila() {
 
-    const nome =
-        document.getElementById('nome-paciente').value.trim();
+    const nome = document.getElementById('nome-paciente').value.trim();
+    const sintomas = document.getElementById('sintomas');
+    const tempo = document.getElementById('tempo-sintomas');
+    const alergias = document.getElementById('alergias').value.trim();
 
-    const sintomas =
-        document.getElementById('sintomas');
-
-    const tempo =
-        document.getElementById('tempo-sintomas');
-
-    const alergias =
-        document.getElementById('alergias').value.trim();
-
-    // validação nativa
-    if (
-        !sintomas.checkValidity() ||
-        !tempo.checkValidity() ||
-        !intensidadeSelecionada
-    ) {
-
+    if (!sintomas.checkValidity() || !tempo.checkValidity() || !intensidadeSelecionada) {
         sintomas.reportValidity();
-
         tempo.reportValidity();
-
-        if (!intensidadeSelecionada) {
-            alert("Selecione a intensidade dos sintomas.");
-        }
-
+        if (!intensidadeSelecionada) alert("Selecione a intensidade dos sintomas.");
         return;
     }
 
-    // prioridades hospitalares
+    // Define prioridade
     let prioridade = "Azul";
     let peso = 3;
-
-    if (intensidadeSelecionada === "Intensa") {
-
-        prioridade = "Vermelho";
-        peso = 0;
-    }
-
-    else if (intensidadeSelecionada === "Forte") {
-
-        prioridade = "Amarelo";
-        peso = 1;
-    }
-
-    else if (intensidadeSelecionada === "Moderada") {
-
-        prioridade = "Verde";
-        peso = 2;
-    }
-
-    else if (intensidadeSelecionada === "Leve") {
-
-        prioridade = "Azul";
-        peso = 3;
-    }
+    if (intensidadeSelecionada === "Intensa") { prioridade = "Vermelho"; peso = 0; }
+    else if (intensidadeSelecionada === "Forte") { prioridade = "Amarelo"; peso = 1; }
+    else if (intensidadeSelecionada === "Moderada") { prioridade = "Verde"; peso = 2; }
 
     const novoPaciente = {
-
         nome,
         sintomas: sintomas.value,
         tempo: tempo.value,
         alergias,
         intensidade: intensidadeSelecionada,
         prioridade,
-        peso
+        peso,
+        status: "Aguardando",
+        created_at: new Date().toISOString()
     };
 
-    pacientes.push(novoPaciente);
+    try {
+        if (!window.supabaseClient) {
+            alert("Erro: Supabase não inicializado. Usando modo local.");
+            // Fallback local caso supabase falhe
+            pacientes.push(novoPaciente);
+            pacienteAtual = novoPaciente;
+            alert("Cadastro realizado com sucesso! (modo local)");
+            goToPage('page-fila');
+            atualizarFilaPublica();
+            return;
+        }
 
-pacienteAtual = novoPaciente;
+        const { data, error } = await window.supabaseClient
+            .from('pacientes')
+            .insert([novoPaciente])
+            .select();
 
-    // ordena por prioridade
-    pacientes.sort((a, b) => a.peso - b.peso);
+        if (error) throw error;
 
-    atualizarFilaPublica();
+        console.log("✅ Paciente cadastrado no Supabase:", data[0]);
 
-    pacientes.push(novoPaciente);
+        pacienteAtual = data[0];
 
-localStorage.setItem(
-    'pacientes',
-    JSON.stringify(pacientes)
-);
+        alert("Cadastro realizado com sucesso! Você foi adicionado à fila.");
+        
+        goToPage('page-fila');
+        carregarPacientesDoSupabase(); // Atualiza a fila
 
-atualizarFilaPublica();
-
-goToPage('page-fila');
+    } catch (error) {
+        console.error("Erro ao cadastrar no Supabase:", error);
+        alert("Erro ao salvar no banco. Tentando modo local...");
+        // Fallback local
+        pacientes.push(novoPaciente);
+        pacienteAtual = novoPaciente;
+        goToPage('page-fila');
+        atualizarFilaPublica();
+    }
 }
 
+// =========================
+// CARREGAR PACIENTES DO SUPABASE
+// =========================
+async function carregarPacientesDoSupabase() {
+    try {
+        if (!window.supabaseClient) {
+            atualizarFilaPublica();
+            return;
+        }
+
+        const { data, error } = await window.supabaseClient
+            .from('pacientes')
+            .select('*')
+            .order('peso', { ascending: true })
+            .order('created_at', { ascending: true });
+
+        if (error) throw error;
+
+        pacientes = data || [];
+        atualizarFilaPublica();
+
+    } catch (err) {
+        console.error("Erro ao carregar pacientes:", err);
+        atualizarFilaPublica();
+    }
+}
 
 // =========================
 // ATUALIZAR FILA
@@ -213,6 +225,8 @@ function atualizarFilaPublica() {
 
     const contador =
         document.getElementById('contador-pacientes');
+
+    if (!lista) return;
 
     lista.innerHTML = '';
 
@@ -288,20 +302,30 @@ function atualizarFilaPublica() {
         lista.appendChild(li);
     });
 
-    // posição REAL do paciente atual
-const posicaoAtual =
-    pacientes.findIndex(
-        p => p.nome === pacienteAtual.nome
-    ) + 1;
+    // 🛡️ CORREÇÃO: Proteção contra pacienteAtual null ou indefinido
+    if (!pacienteAtual && pacientes.length > 0) {
+        pacienteAtual = pacientes[0];
+    }
 
-posElem.innerText =
-    String(posicaoAtual).padStart(2, '0') + 'º';
+    if (pacienteAtual && pacientes.length > 0) {
+        const posicaoAtual = pacientes.findIndex(p => 
+            p.id === pacienteAtual.id || p.nome === pacienteAtual.nome
+        ) + 1;
 
-statusElem.innerText =
-    pacienteAtual.prioridade;
+        if (posElem) {
+            posElem.innerText = String(posicaoAtual).padStart(2, '0') + 'º';
+        }
+        if (statusElem) {
+            statusElem.innerText = pacienteAtual.prioridade || "Aguardando";
+        }
+    } else {
+        if (posElem) posElem.innerText = "—";
+        if (statusElem) statusElem.innerText = "—";
+    }
 
-    contador.innerText =
-        `${pacientes.length} pacientes`;
+    if (contador) {
+        contador.innerText = `${pacientes.length} pacientes`;
+    }
 }
 
 
@@ -373,7 +397,19 @@ function getCorPrioridade(prioridade) {
 
 
 // =========================
-// INICIALIZAR
+// INICIALIZAÇÃO
 // =========================
 
-atualizarFilaPublica();
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("🚀 Sistema Vida+ inicializado");
+
+    // Tenta inicializar Supabase
+    if (typeof initSupabase === 'function') {
+        initSupabase();
+    }
+
+    // Carrega dados do Supabase (com delay para dar tempo de inicializar)
+    setTimeout(() => {
+        carregarPacientesDoSupabase();
+    }, 600);
+});
