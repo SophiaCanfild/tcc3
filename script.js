@@ -45,7 +45,7 @@ function selecionarIntensidade(botao, valor) {
 }
 
 // =========================
-// ENTRAR NA FILA (COM SUPABASE)
+// ENTRAR NA FILA (SUPABASE)
 // =========================
 async function entrarNaFila() {
     const nome = document.getElementById('nome-paciente').value.trim();
@@ -83,8 +83,8 @@ async function entrarNaFila() {
             alert("Erro: Supabase não inicializado. Usando modo local.");
             pacientes.push(novoPaciente);
             pacienteAtual = novoPaciente;
-            goToPage('page-fila');
             atualizarFilaPublica();
+            goToPage('page-fila');
             return;
         }
 
@@ -101,17 +101,17 @@ async function entrarNaFila() {
         carregarPacientesDoSupabase();
 
     } catch (error) {
-        console.error(error);
-        alert("Erro no Supabase. Usando modo local.");
+        console.error("Erro Supabase:", error);
+        alert("Erro no Supabase → usando modo local.");
         pacientes.push(novoPaciente);
         pacienteAtual = novoPaciente;
-        goToPage('page-fila');
         atualizarFilaPublica();
+        goToPage('page-fila');
     }
 }
 
 // =========================
-// CARREGAR PACIENTES
+// CARREGAR PACIENTES DO SUPABASE
 // =========================
 async function carregarPacientesDoSupabase() {
     try {
@@ -124,15 +124,16 @@ async function carregarPacientesDoSupabase() {
             .order('created_at', { ascending: true });
 
         if (error) throw error;
+
         pacientes = data || [];
         atualizarFilaPublica();
     } catch (err) {
-        console.error(err);
+        console.error("Erro ao carregar:", err);
     }
 }
 
 // =========================
-// ATUALIZAR FILA (mantida igual a sua original)
+// ATUALIZAR FILA (sua versão original mantida)
 // =========================
 function atualizarFilaPublica() {
     const lista = document.getElementById('lista-pacientes');
@@ -147,6 +148,7 @@ function atualizarFilaPublica() {
         const emAtendimento = i === 0;
         const li = document.createElement('li');
         li.className = `rounded-2xl p-5 flex items-center justify-between ${emAtendimento ? 'bg-emerald-700 text-white' : 'bg-[#f7faf8] text-slate-800'}`;
+        
         li.innerHTML = `
             <div class="flex items-center gap-4">
                 <div class="min-w-[40px] h-[40px] rounded-full flex items-center justify-center font-bold ${emAtendimento ? 'bg-white/20 text-white' : 'bg-emerald-700 text-white'}">
@@ -166,7 +168,6 @@ function atualizarFilaPublica() {
         lista.appendChild(li);
     });
 
-    // Proteção
     if (!pacienteAtual && pacientes.length > 0) pacienteAtual = pacientes[0];
 
     if (pacienteAtual) {
@@ -177,8 +178,7 @@ function atualizarFilaPublica() {
     if (contador) contador.innerText = `${pacientes.length} pacientes`;
 }
 
-// (Mantenha as funções ocultarSobrenome, confirmarCancelamento, getCorPrioridade iguais às suas)
-
+// Funções auxiliares (mantidas)
 function ocultarSobrenome(nomeCompleto) {
     const partes = nomeCompleto.trim().split(" ");
     if (partes.length === 1) return partes[0];
@@ -186,7 +186,7 @@ function ocultarSobrenome(nomeCompleto) {
 }
 
 function confirmarCancelamento() {
-    if (!confirm("Tem certeza que deseja cancelar?")) return;
+    if (!confirm("Tem certeza que deseja cancelar seu atendimento?")) return;
     if (!confirm("Deseja realmente continuar?")) return;
     alert("Atendimento cancelado.");
     goToPage('page-home');
@@ -203,6 +203,10 @@ function getCorPrioridade(prioridade) {
 // INICIALIZAÇÃO
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof initSupabase === 'function') initSupabase();
-    setTimeout(carregarPacientesDoSupabase, 700);
+    if (typeof initSupabase === 'function') {
+        initSupabase();
+    }
+    setTimeout(() => {
+        carregarPacientesDoSupabase();
+    }, 800);
 });
