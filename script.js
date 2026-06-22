@@ -203,10 +203,15 @@ function getCorPrioridade(prioridade) {
 // INICIALIZAÇÃO
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("🚀 Sistema Vida+ carregando...");
+
+    // Força inicialização do Supabase
     if (typeof initSupabase === 'function') {
         initSupabase();
     }
+
+    // Dá um tempo maior para o Supabase carregar
     setTimeout(() => {
         carregarPacientesDoSupabase();
-    }, 800);
+    }, 1000);
 });
