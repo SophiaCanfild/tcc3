@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vida+ Sistema de Espera</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    // Silencia o aviso de produção
+    tailwind.config = {
+        content: [],
+        theme: {
+            extend: {}
+        }
+    };
+</script>
+<!-- Evita o erro 404 do favicon -->
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Fraunces:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
