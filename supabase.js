@@ -5,6 +5,11 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 let supabaseClient = null;
 
 function initSupabase() {
+    if (window.supabaseClient) {
+        console.log("✅ Supabase já estava inicializado.");
+        return window.supabaseClient;
+    }
+
     if (typeof window.supabase === "undefined") {
         console.error("❌ Biblioteca Supabase não carregada!");
         return null;
@@ -12,7 +17,7 @@ function initSupabase() {
 
     try {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        window.supabaseClient = supabaseClient;   // ← Isso é importante
+        window.supabaseClient = supabaseClient;
         console.log("✅ Supabase inicializado com sucesso!");
         return supabaseClient;
     } catch (error) {
@@ -21,7 +26,5 @@ function initSupabase() {
     }
 }
 
-// Inicializa
 document.addEventListener('DOMContentLoaded', initSupabase);
-
 window.initSupabase = initSupabase;
