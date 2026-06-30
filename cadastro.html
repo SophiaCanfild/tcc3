@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Cadastro  e Admin</title>
-    <!-- Vincula o arquivo CSS externo -->
+    <title>Sistema de Cadastro e Admin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
+        <!-- Botões de Navegação por Abas -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="abrirAba('cadastro')">Cadastro</button>
+            <button class="tab-btn" onclick="abrirAba('admin')">Painel Admin</button>
+        </div>
+
         <!-- Tela de Cadastro -->
-        <section class="cadastro-section">
+        <section id="cadastro" class="tab-content active">
             <h2>Formulário de Cadastro</h2>
             <form id="cadastroForm">
                 <div class="form-group">
                     <label for="nome">Nome Completo</label>
                     <input type="text" id="nome" required placeholder="Digite seu nome">
                 </div>
-
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" required placeholder="Digite seu e-mail">
                 </div>
-
                 <div class="form-group">
                     <label for="perfil">Perfil de Acesso</label>
                     <select id="perfil" required>
@@ -32,14 +34,13 @@
                         <option value="Administrador">Administrador</option>
                     </select>
                 </div>
-
                 <button type="submit">Cadastrar Usuário</button>
             </form>
         </section>
 
         <!-- Área Administrativa -->
-        <section class="admin-section">
-            <h2>Painel Administrativo (Usuários Cadastrados)</h2>
+        <section id="admin" class="tab-content">
+            <h2>Painel Administrativo</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -51,17 +52,12 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelaUsuarios">
-                        <!-- Gerado dinamicamente pelo JavaScript -->
-                    </tbody>
+                    <tbody id="tabelaUsuarios"></tbody>
                 </table>
                 <div id="mensagemVazia" class="empty-msg">Nenhum usuário cadastrado ainda.</div>
             </div>
         </section>
     </div>
-
-    <!-- Vincula o arquivo JavaScript externo -->
     <script src="script.js"></script>
 </body>
 </html>
-
