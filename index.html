@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vida+ Sistema de Espera</title>
-    <script src="https://tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 <script>
     // Silencia o aviso de produção
     tailwind.config = {
@@ -16,8 +16,8 @@
 </script>
 <!-- Evita o erro 404 do favicon -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <script src="https://jsdelivr.net"></script>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Fraunces:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="text-slate-800">
@@ -49,16 +49,6 @@
                     Cuidando de você com carinho
                 </p>
             </div>
-        </div>
-
-        <!-- ABAS DE NAVEGAÇÃO ADICIONADAS -->
-        <div class="flex bg-emerald-100/80 p-1.5 rounded-2xl gap-1 relative z-20">
-            <button onclick="mudarAba('aba-home')" id="btn-home" class="tab-btn px-5 py-2 rounded-xl font-semibold transition-all duration-300 bg-emerald-700 text-white shadow-sm">
-                Início
-            </button>
-            <button onclick="mudarAba('aba-painel')" id="btn-painel" class="tab-btn px-5 py-2 rounded-xl font-semibold transition-all duration-300 text-emerald-800 hover:bg-emerald-200/50">
-                Painel Admin
-            </button>
         </div>
 
         <!-- infos topo -->
@@ -93,134 +83,608 @@
     <!-- HERO -->
     <main class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-20">
 
-        <!-- ABA 1: CONTEÚDO PRINCIPAL ORIGINAL -->
-        <div id="aba-home" class="tab-content block">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
 
-                <!-- LADO ESQUERDO -->
-                <div>
+            <!-- LADO ESQUERDO -->
+            <div>
 
-                    <!-- badge -->
-                    <div
-                        class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-8">
+                <!-- badge -->
+                <div
+                    class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold mb-8">
 
-                        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
 
-                        Pronto-socorro aberto agora
-                    </div>
-
-                    <!-- título -->
-                    <h1
-                        class="font-display text-[54px] md:text-[76px] leading-[0.95] text-emerald-950 tracking-[-2px] max-w-xl">
-                        Seu cuidado começa aqui.
-                    </h1>
-
-                    <!-- subtítulo -->
-                    <p class="mt-8 text-[22px] leading-relaxed text-emerald-900/60 max-w-2xl">
-                        Faça seu cadastro, conte o que está sentindo e acompanhe sua posição na fila em tempo real.
-                    </p>
-
-                    <!-- botão -->
-                    <button onclick="goToPage('page-cadastro')"
-                        class="mt-10 bg-[#0b7a4b] hover:bg-[#08653e] transition-all duration-300 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-emerald-900/10 flex items-center gap-4">
-
-                        Iniciar atendimento
-
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-
-                    <!-- status -->
-                    <div class="flex gap-20 mt-16 border-t border-emerald-100 pt-10">
-
-                        <div>
-                            <h3 class="text-5xl font-display text-emerald-900">
-                                5
-                            </h3>
-
-                            <p class="text-emerald-900/50 mt-2">
-                                Na fila
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-5xl font-display text-emerald-900">
-                                ~15min
-                            </h3>
-
-                            <p class="text-emerald-900/50 mt-2">
-                                Espera média
-                            </p>
-                        </div>
-                    </div>
+                    Pronto-socorro aberto agora
                 </div>
 
-                <!-- CARD DIREITO -->
-                <div class="relative">
+                <!-- título -->
+                <h1
+                    class="font-display text-[54px] md:text-[76px] leading-[0.95] text-emerald-950 tracking-[-2px] max-w-xl">
+                    Seu cuidado começa aqui.
+                </h1>
 
-                    <!-- ícone flutuante -->
-                    <div
-                        class="absolute -top-8 right-10 w-24 h-24 rounded-3xl bg-emerald-500 rotate-12 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+                <!-- subtítulo -->
+                <p class="mt-8 text-[22px] leading-relaxed text-emerald-900/60 max-w-2xl">
+                    Faça seu cadastro, conte o que está sentindo e acompanhe sua posição na fila em tempo real.
+                </p>
 
-                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-                    </div>
+                <!-- botão -->
+                <button onclick="goToPage('page-cadastro')"
+                    class="mt-10 bg-[#0b7a4b] hover:bg-[#08653e] transition-all duration-300 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-emerald-900/10 flex items-center gap-4">
 
-                    <!-- card -->
-                    <div
-                        class="bg-white/90 backdrop-blur-md rounded-[40px] p-12 shadow-[0_20px_80px_rgba(16,185,129,0.12)] border border-white">
+                    Iniciar atendimento
 
-                        <h3 class="font-display text-4xl text-emerald-950 mb-10">
-                            Como funciona
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+                <!-- status -->
+                <div class="flex gap-20 mt-16 border-t border-emerald-100 pt-10">
+
+                    <div>
+                        <h3 class="text-5xl font-display text-emerald-900">
+                            5
                         </h3>
 
-                        <div class="space-y-8">
-
-                            <div class="flex gap-5">
-                                <div
-                                    class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
-                                    1
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-xl text-emerald-950">
-                                        Cadastro
-                                    </h4>
-
-                                    <p class="text-emerald-900/50 mt-1">
-                                        Informe seus dados pessoais
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-5">
-                                <div
-                                    class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
-                                    2
-                                </div>
-
-                                <div>
-                                    <h4 class="font-bold text-xl text-emerald-950">
-                                        Triagem
-                                    </h4>
-
-                                    <p class="text-emerald-900/50 mt-1">
-                                        Aguarde o direcionamento médico
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
+                        <p class="text-emerald-900/50 mt-2">
+                            Na fila
+                        </p>
                     </div>
+
+                    <div>
+                        <h3 class="text-5xl font-display text-emerald-900">
+                            ~15min
+                        </h3>
+
+                        <p class="text-emerald-900/50 mt-2">
+                            Espera média
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD DIREITO -->
+            <div class="relative">
+
+                <!-- ícone flutuante -->
+                <div
+                    class="absolute -top-8 right-10 w-24 h-24 rounded-3xl bg-emerald-500 rotate-12 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+
+                <!-- card -->
+                <div
+                    class="bg-white/90 backdrop-blur-md rounded-[40px] p-12 shadow-[0_20px_80px_rgba(16,185,129,0.12)] border border-white">
+
+                    <h3 class="font-display text-4xl text-emerald-950 mb-10">
+                        Como funciona
+                    </h3>
+
+                    <div class="space-y-8">
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                1
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Cadastro
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Informe seus dados pessoais
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                2
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Formulário
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Responda perguntas sobre seus sintomas
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-5">
+                            <div
+                                class="min-w-[52px] h-[52px] rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                                3
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-xl text-emerald-950">
+                                    Fila
+                                </h4>
+
+                                <p class="text-emerald-900/50 mt-1">
+                                    Veja sua posição e tempo estimado
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- footer -->
+    <footer
+        class="absolute bottom-6 left-1/2 -translate-x-1/2 text-emerald-900/40 text-sm">
+        © Vida+ — Sistema de triagem demonstrativo
+    </footer>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PAGE CADASTRO -->
+<!-- ====================================== -->
+
+<section id="page-cadastro" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
+
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/40 blur-3xl rounded-full"></div>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
+
+        <!-- voltar -->
+        <button onclick="goToPage('page-home')"
+            class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
+
+            ← Voltar
+        </button>
+
+        <!-- steps -->
+        <div class="flex items-center mb-14">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                1
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                2
+            </div>
+
+            <div class="flex-1 h-[2px] bg-slate-200 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+
+        </div>
+
+        <!-- título -->
+        <div class="mb-10">
+
+            <h1 class="font-display text-6xl leading-none text-emerald-950">
+                Cadastro do paciente
+            </h1>
+
+            <p class="mt-4 text-xl text-emerald-900/55">
+                Preencha seus dados para começar o atendimento.
+            </p>
+
+        </div>
+
+        <!-- card -->
+        <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
+
+            <div class="space-y-8">
+
+                <!-- nome -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome-paciente"
+                        required
+                        placeholder="Maria da Silva"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
+                    >
+
+                </div>
+
+                <!-- nascimento -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nascimento-paciente"
+                        required
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
+                    >
+
+                </div>
+
+                <!-- telefone -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone-paciente"
+                        required
+                        placeholder="(11) 99999-9999"
+                        inputmode="numeric"
+                        oninput="this.value = this.value.replace(/[^0-9()-\s]/g, '')"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
+                    >
+
+                </div>
+
+                <!-- botão -->
+                <button
+                    onclick="validarCadastro()"
+                    class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg">
+
+                    Continuar →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- PAGE TRIAGEM -->
+<!-- ====================================== -->
+
+<section id="page-triagem" class="hidden min-h-screen relative overflow-hidden bg-[#f4fbf7]">
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-14">
+
+        <!-- voltar -->
+        <button onclick="goToPage('page-cadastro')"
+            class="flex items-center gap-2 text-emerald-900/70 font-medium hover:text-emerald-950 mb-10">
+
+            ← Voltar
+        </button>
+
+        <!-- steps -->
+        <div class="flex items-center mb-14">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                2
+            </div>
+
+            <div class="flex-1 h-[2px] bg-slate-200 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-white text-slate-400 border border-slate-200 flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+
+        </div>
+
+        <!-- título -->
+        <div class="mb-10">
+
+            <h1 class="font-display text-6xl leading-none text-emerald-950">
+                Formulário médico
+            </h1>
+
+            <p class="mt-4 text-xl text-emerald-900/55">
+                Conte-nos o que está sentindo.
+            </p>
+
+        </div>
+
+        <!-- card -->
+        <div class="bg-white rounded-[36px] p-10 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.10)] border border-white">
+
+            <div class="space-y-8">
+
+                <!-- sintomas -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        O que você está sentindo?
+                    </label>
+
+                    <textarea
+                        id="sintomas"
+                        required
+                        placeholder="Descreva seus sintomas..."
+                        class="w-full h-40 px-6 py-5 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg resize-none outline-none focus:border-emerald-500"
+                    ></textarea>
+
+                </div>
+
+                <!-- tempo -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Há quanto tempo está com esses sintomas?
+                    </label>
+
+                    <select
+                        id="tempo-sintomas"
+                        required
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
+                    >
+
+                        <option value="">Selecione...</option>
+                        <option>Há algumas horas</option>
+                        <option>Desde ontem</option>
+                        <option>Há alguns dias</option>
+                        <option>Há mais de uma semana</option>
+
+                    </select>
+
+                </div>
+
+                <!-- intensidade -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-4">
+                        Intensidade dos sintomas
+                    </label>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                        <button
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
+                            onclick="selecionarIntensidade(this, 'Leve')">
+
+                            <div class="text-2xl mb-3">🙂</div>
+
+                            <h3 class="font-bold text-emerald-950">Leve</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Desconforto pequeno
+                            </p>
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
+                            onclick="selecionarIntensidade(this, 'Moderada')">
+
+                            <div class="text-2xl mb-3">😕</div>
+
+                            <h3 class="font-bold text-emerald-950">Moderada</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Incomoda bastante
+                            </p>
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
+                            onclick="selecionarIntensidade(this, 'Forte')">
+
+                            <div class="text-2xl mb-3">😣</div>
+
+                            <h3 class="font-bold text-emerald-950">Forte</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Muita dor
+                            </p>
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-intensidade bg-[#f9fcfa] border border-emerald-100 rounded-2xl p-5 text-left hover:border-emerald-400"
+                            onclick="selecionarIntensidade(this, 'Intensa')">
+
+                            <div class="text-2xl mb-3">🚨</div>
+
+                            <h3 class="font-bold text-emerald-950">Intensa</h3>
+
+                            <p class="text-sm text-emerald-900/45 mt-1">
+                                Insuportável
+                            </p>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- alergias -->
+                <div>
+
+                    <label class="block text-emerald-900 font-semibold mb-3">
+                        Tem alguma alergia?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="alergias"
+                        placeholder="Opcional"
+                        class="w-full h-16 px-6 rounded-2xl border border-emerald-100 bg-[#f9fcfa] text-lg outline-none focus:border-emerald-500"
+                    >
+
+                </div>
+
+                <!-- botão -->
+                <button
+                    onclick="entrarNaFila()"
+                    class="w-full h-16 bg-[#0b7a4b] hover:bg-[#08653e] text-white rounded-2xl font-bold text-lg">
+
+                    Entrar na fila →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<!-- ====================================== -->
+<!-- PAGE FILA -->
+<!-- ====================================== -->
+
+<section id="page-fila" class="hidden min-h-screen bg-[#f4fbf7] py-14 px-6">
+
+    <div class="max-w-5xl mx-auto">
+
+        <!-- steps -->
+        <div class="flex items-center mb-10">
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                ✓
+            </div>
+
+            <div class="flex-1 h-[2px] bg-emerald-700 mx-4 rounded-full"></div>
+
+            <div class="w-12 h-12 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
+                3
+            </div>
+
+        </div>
+
+        <!-- card verde -->
+        <div class="bg-emerald-700 rounded-[36px] p-10 text-white mb-8">
+
+            <p class="text-white/70 text-sm mb-4">
+                Você está na fila
+            </p>
+
+            <div class="flex items-end gap-4 mb-10">
+
+                <h1 id="posicao-fila" class="font-display text-8xl leading-none">
+                    01º
+                </h1>
+
+                <span class="mb-3 text-white/70">
+                    na fila
+                </span>
+
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 border-t border-white/20 pt-8">
+
+                <div>
+
+                    <p class="text-white/60 text-sm uppercase tracking-wider mb-2">
+                        Tempo estimado
+                    </p>
+
+                    <h3 class="text-3xl font-bold">
+                        Próximo!
+                    </h3>
+
+                </div>
+
+                <div>
+
+                    <p class="text-white/60 text-sm uppercase tracking-wider mb-2">
+                        Prioridade
+                    </p>
+
+                    <h3 id="status-prioridade" class="text-3xl font-bold">
+                        Verde
+                    </h3>
+
                 </div>
 
             </div>
+
         </div>
 
-        <!-- ABA 2: PAINEL ADMINISTRATIVO ADICIONADO -->
-        <div id="aba-painel" class="tab-content hidden max-w-6xl mx-auto">
-            <div class="bg-white/90 backdrop-blur-md rounded-[40px] p-8 md:p-12 shadow-[0_20px_80px_rgba(16,185,129,0.12)] border border-white">
+        <!-- lista -->
+        <div class="bg-white rounded-[36px] p-8 shadow-[0_20px_80px_rgba(16,185,129,0.10)]">
+
+            <div class="flex items-center justify-between mb-6">
+
+                <h2 class="font-display text-3xl text-emerald-950">
+                    Fila de atendimento
+                </h2>
+
+                <span id="contador-pacientes"
+                    class="text-emerald-900/50 font-medium">
+                    0 pacientes
+                </span>
+
+            </div>
+
+            <ul id="lista-pacientes" class="space-y-4"></ul>
+
+            <!-- botões -->
+            <div class="grid md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-100">
+
+                <button
+                    onclick="goToPage('page-home')"
+                    class="h-14 rounded-2xl border border-emerald-700 text-emerald-700 font-bold hover:bg-emerald-50">
+
+                    ⌂ Tela inicial
+
+                </button>
+
+                <button
+                    onclick="confirmarCancelamento()"
+                    class="h-14 rounded-2xl bg-red-50 text-red-600 font-bold hover:bg-red-100">
+
+                    ✕ Cancelar atendimento
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
